@@ -12,19 +12,12 @@ public class GravityController : MonoBehaviour
 		if (Input.GetKey(KeyCode.E) && IsGravityFlipped == false)
 		{
 			IsGravityFlipped = true;
-		}
+            Physics.gravity *= -1;
+
+        }
 		else
 		{
 			IsGravityFlipped = false;
-		}
-	}
-
-	void FixedUpdate()
-	{
-		if (IsGravityFlipped == true)
-		{
-			Physics.gravity *= -1;
-			
 		}
 	}
 }

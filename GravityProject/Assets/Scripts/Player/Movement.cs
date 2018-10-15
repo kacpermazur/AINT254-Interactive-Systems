@@ -27,8 +27,6 @@ public class Movement : MonoBehaviour
 	void Update ()
 	{
 		PlayerControls();
-
-		Debug.Log(IsGrounded());
 	}
 
 

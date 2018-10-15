@@ -5,11 +5,14 @@ using UnityEngine;
 public class AttractTo : MonoBehaviour
 {
 
-	[SerializeField]
-	private GameObject _playerPos;
-	
-	private Rigidbody _object;
+    [SerializeField]
+    private GameObject _playerPos;
+    private Rigidbody _object;
 
+    [SerializeField]
+    private float _minDistance;
+
+    // Attract Properties
 	private Vector3 _direction;
 	private float _distance;
 	private float _force;
@@ -24,15 +27,25 @@ public class AttractTo : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		AttractToObject();
+        DistanceCheck();
+
+        //Debug.Log(_distance);
+
+        if(_distance < _minDistance)
+        {
+            AttractToObject();
+        }
 	}
+
+    private void DistanceCheck()
+    {
+        // Distance from BlackHole To Player
+        _direction = _object.position - _playerPos.transform.position;
+        _distance = _direction.magnitude;
+    }
 
 	private void AttractToObject()
 	{
-		// Distance from BlackHole To Player
-		_direction = _object.position - _playerPos.transform.position;
-		_distance = _direction.magnitude;
-		
 		// Mass Of Two Obj To Get Force
 		_force = (_object.mass * _playerPos.GetComponent<Rigidbody>().mass);
 		
