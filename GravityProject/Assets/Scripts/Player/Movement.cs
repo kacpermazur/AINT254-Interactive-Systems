@@ -27,6 +27,7 @@ public class Movement : MonoBehaviour
 	void Update ()
 	{
 		PlayerControls();
+		
 	}
 
 
@@ -52,6 +53,8 @@ public class Movement : MonoBehaviour
 		Ray downwardRay = new Ray(transform.position, -transform.up);
 
 		Physics.Raycast(downwardRay, out distanceRay);
+		
+		//Debug.Log(distanceRay.distance);
 
 		// Above Standing Distance or 0 If Ray Doest Hit Any Surface
 		if (distanceRay.distance < 1.1f && distanceRay.distance != 0)

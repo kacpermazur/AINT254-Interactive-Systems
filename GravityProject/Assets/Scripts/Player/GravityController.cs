@@ -9,8 +9,9 @@ public class GravityController : MonoBehaviour
 	
 	void Update()
 	{
-		if (Input.GetKey(KeyCode.E) && IsGravityFlipped == false)
+		if (Input.GetKeyDown(KeyCode.E) && IsGravityFlipped == false)
 		{
+			
 			IsGravityFlipped = true;
             Physics.gravity *= -1;
 
