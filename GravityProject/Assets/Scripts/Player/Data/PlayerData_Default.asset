@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 8
   RotateSpeed: 180
-  JumpPower: 10000
+  JumpPower: 40000

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine;
 using Core.Input;
 using Player.Data;
 
@@ -19,22 +20,49 @@ namespace Player
 			}
 		}
 
+		void Update()
+		{
+			if (isInitialized)
+			{
+				Jump();
+			}
+		}
+		
 		void FixedUpdate()
 		{
 			if (isInitialized)
 			{
 				Movement();
+				GravityFlip();
 			}
 		}
-
+		
 		private void Movement()
 		{
 			transform.Translate(0, 0, InputHandler.Vertical() * _playerData.MoveSpeed * Time.deltaTime);
-			transform.Rotate(0, InputHandler.Horizontal() * _playerData.RotateSpeed * Time.deltaTime, 0);
+			transform.Rotate(0, InputHandler.Horizontal() * _playerData.RotateSpeed * Time.deltaTime, 0);	
+		}
 
+		private void Jump()
+		{
 			if (InputHandler.Jump() && IsGrounded())
 			{
 				PlayerManager.PlayerRigidbody.AddForce(Vector3.up * _playerData.JumpPower * Time.deltaTime);
+			}
+		}
+
+		private void GravityFlip()
+		{
+			bool isGravityFlipped = false;
+			
+			if (InputHandler.FlipGravity() && isGravityFlipped == false)
+			{
+				isGravityFlipped = true;
+				Physics.gravity *= -1;
+			}
+			else
+			{
+				isGravityFlipped = false;
 			}
 		}
 
@@ -49,5 +77,6 @@ namespace Player
 			
 			return distanceFromPlayer.distance < floorThreshold && distanceFromPlayer.distance != 0;
 		}
+			
 	}
 }

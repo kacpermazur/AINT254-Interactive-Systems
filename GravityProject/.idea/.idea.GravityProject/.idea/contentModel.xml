@@ -17,11 +17,9 @@
             <e p="AttractTo.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
-            <e p="CameraController.cs" t="Include" />
             <e p="Data" t="Include">
               <e p="PlayerData.cs" t="Include" />
             </e>
-            <e p="GravityController.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="PlayerManager.cs" t="Include" />
           </e>
