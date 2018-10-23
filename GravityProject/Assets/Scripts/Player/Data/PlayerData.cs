@@ -11,6 +11,4 @@ namespace Player.Data
 		public float RotateSpeed;
 		public float JumpPower;
 	}
-
-
 }

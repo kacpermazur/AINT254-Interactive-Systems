@@ -1,47 +1,55 @@
-﻿using UnityEngine;
+﻿using Physics.Data;
+using UnityEngine;
 using Player;
 
-public class AttractTo : MonoBehaviour
+namespace Physics
 {
-    [SerializeField] private float _minDistance;
-
-	private Rigidbody _object;
-	
-	private Transform _playerTransform;
-	private Rigidbody _playerRigidbody;
-	
-	private Vector3 _direction;
-	private float _distance;
-	private float _force;
-	
-	
-	void Start ()
+	[RequireComponent(typeof(Rigidbody),typeof(SphereCollider))]
+	public class AttractTo : MonoBehaviour
 	{
-		_playerTransform = PlayerManager.PlayerTransform;
-		_playerRigidbody = PlayerManager.PlayerRigidbody;
+		private static readonly string AttractToObjectName = typeof(AttractTo).Name;
 
-		_object = GetComponent<Rigidbody>();
-	}
+		private Transform _playerTransform;
+		private Rigidbody _playerRigidbody;
 
-	void FixedUpdate()
-	{
-        DistanceCheck();
+		private Rigidbody _object;
+		private SphereCollider _collider;
 
-        if(_distance < _minDistance)
-        {
-            AttractToObject();
-        }
-	}
+		private Vector3 _direction;
+		private float _force;
 
-    private void DistanceCheck()
-    {
-        _direction = _object.position - _playerTransform.position;
-        _distance = _direction.magnitude;
-    }
+		[SerializeField] private float _attractRadius;
 
-	private void AttractToObject()
-	{
-		_force = (_object.mass * _playerRigidbody.mass);
-		_playerRigidbody.AddForce(_direction.normalized * _force);
+		void Start()
+		{
+			_playerTransform = PlayerManager.PlayerTransform;
+			_playerRigidbody = PlayerManager.PlayerRigidbody;
+
+			_object = GetComponent<Rigidbody>();
+			_collider = GetComponent<SphereCollider>();
+
+			_collider.radius = _attractRadius;
+		}
+		
+		private void OnTriggerStay(Collider other)
+		{
+			if (other.gameObject.CompareTag("Player"))
+			{
+				AttractToObject();
+			}
+		}
+
+		private void AttractToObject()
+		{
+			_direction = _object.position - _playerTransform.position;
+			_force = (_object.mass * _playerRigidbody.mass);
+
+			_playerRigidbody.AddForce(_direction.normalized * _force);
+		}
+
+		private static void LogMessage(string message)
+		{
+			Debug.Log("<color=yellow>" + AttractToObjectName + "</color> : " + message);
+		}
 	}
 }

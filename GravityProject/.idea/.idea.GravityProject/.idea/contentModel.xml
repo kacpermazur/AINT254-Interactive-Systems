@@ -18,6 +18,7 @@
           </e>
           <e p="Player" t="Include">
             <e p="Data" t="Include">
+              <e p="PhysicsData.cs" t="Include" />
               <e p="PlayerData.cs" t="Include" />
             </e>
             <e p="PlayerController.cs" t="Include" />

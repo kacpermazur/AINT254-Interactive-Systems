@@ -6,7 +6,7 @@ using Player.Data;
 namespace Player
 {
 	[RequireComponent(typeof(Rigidbody), typeof(PlayerController))]
-	public class PlayerManager : MonoBehaviour,Initializable
+	public class PlayerManager : MonoBehaviour, Initializable
 	{
 		private static readonly string PlayerMangerObjectName = typeof(PlayerManager).Name;
 		private static PlayerManager _instance;
@@ -46,7 +46,6 @@ namespace Player
 			
 			Initialize();
 		}
-
 
 		public void Initialize()
 		{

@@ -1,10 +1,11 @@
 ﻿using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEngine;
 using Core.Input;
 using Player.Data;
 
 namespace Player
 {
+	using UnityEngine;
+	
 	public class PlayerController : MonoBehaviour, Initializable
 	{
 		private PlayerData _playerData;
