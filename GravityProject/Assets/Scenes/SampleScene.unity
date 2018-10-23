@@ -375,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca1cfd8f9247614f93dfe210987058d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _forceMultiplyer: 1
   _attractRadius: 3
 --- !u!54 &904705607
 Rigidbody:

@@ -18,6 +18,7 @@ namespace Physics
 		private Vector3 _direction;
 		private float _force;
 
+		[SerializeField] private float _forceMultiplyer;
 		[SerializeField] private float _attractRadius;
 
 		void Start()
@@ -44,7 +45,7 @@ namespace Physics
 			_direction = _object.position - _playerTransform.position;
 			_force = (_object.mass * _playerRigidbody.mass);
 
-			_playerRigidbody.AddForce(_direction.normalized * _force);
+			_playerRigidbody.AddForce(_direction.normalized * _force * _forceMultiplyer);
 		}
 
 		private static void LogMessage(string message)
