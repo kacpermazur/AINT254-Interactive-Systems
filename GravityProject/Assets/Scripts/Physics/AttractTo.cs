@@ -31,7 +31,15 @@ namespace Physics
 
 			_collider.radius = _attractRadius;
 		}
-		
+
+		private void OnTriggerEnter(Collider other)
+		{
+			if (other.gameObject.CompareTag("Player"))
+			{
+				Destroy(gameObject, 1);
+			}
+		}
+
 		private void OnTriggerStay(Collider other)
 		{
 			if (other.gameObject.CompareTag("Player"))

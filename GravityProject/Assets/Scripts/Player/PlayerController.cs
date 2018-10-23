@@ -8,6 +8,8 @@ namespace Player
 	
 	public class PlayerController : MonoBehaviour, Initializable
 	{
+		private static readonly string PlayerControllerObjectName = typeof(PlayerController).Name;
+		
 		private PlayerData _playerData;
 
 		private bool isInitialized;
@@ -26,6 +28,7 @@ namespace Player
 			if (isInitialized)
 			{
 				Jump();
+				GravityFlip();
 			}
 		}
 		
@@ -34,7 +37,6 @@ namespace Player
 			if (isInitialized)
 			{
 				Movement();
-				GravityFlip();
 			}
 		}
 		
@@ -60,6 +62,8 @@ namespace Player
 			{
 				isGravityFlipped = true;
 				Physics.gravity *= -1;
+				
+				PlayerManager.PlayerTransform.Rotate(180, 0, 0);
 			}
 			else
 			{
@@ -70,14 +74,20 @@ namespace Player
 		private bool IsGrounded()
 		{
 			RaycastHit distanceFromPlayer;
-			Ray underPlayerFeet = new Ray(transform.position.normalized, -transform.up);
+			Ray underPlayerFeet = new Ray(transform.position, -transform.up);
 
 			Physics.Raycast(underPlayerFeet, out distanceFromPlayer);
 
-			float floorThreshold = 1.1F;
+			float floorThreshold = 1.1f;
+			
+			LogMessage(distanceFromPlayer.distance.ToString());
 			
 			return distanceFromPlayer.distance < floorThreshold && distanceFromPlayer.distance != 0;
 		}
 			
+		private static void LogMessage(string message)
+		{
+			Debug.Log("<color=green>" + PlayerControllerObjectName + "</color> : " + message);
+		}
 	}
 }
