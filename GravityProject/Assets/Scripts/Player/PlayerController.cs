@@ -6,7 +6,7 @@ namespace Player
 {
 	using UnityEngine;
 	
-	public class PlayerController : MonoBehaviour, Initializable
+	public class PlayerController : MonoBehaviour, IInitializable
 	{
 		private static readonly string PlayerControllerObjectName = typeof(PlayerController).Name;
 		

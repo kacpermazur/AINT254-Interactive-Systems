@@ -23,5 +23,10 @@
         {
             return Input.GetKeyDown(KeyCode.E);
         }
+
+        public static bool Shoot()
+        {
+            return Input.GetKeyDown("Fire1");
+        }
     }
 }
