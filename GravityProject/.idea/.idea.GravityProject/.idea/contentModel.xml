@@ -9,6 +9,9 @@
         <e p="Scripts" t="Include">
           <e p="Camera" t="Include">
             <e p="CameraManger.cs" t="Include" />
+            <e p="Data" t="Include">
+              <e p="CameraData.cs" t="Include" />
+            </e>
           </e>
           <e p="Core" t="Include">
             <e p="Initializable.cs" t="Include" />
