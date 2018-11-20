@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Camera;
 using Camera.Data;
+using Player;
 using UnityEngine;
 
 namespace Camera
@@ -25,12 +26,24 @@ namespace Camera
 
 		void Update()
 		{
-			LogMessage(_cameraData.FollowSpeed.ToString());
+			if (isInitialized)
+			{
+				FollowTarget();
+				PlayerRotate();
+			}
 		}
 
 		private void FollowTarget()
 		{
+			Vector3 moveToTarget = Vector3.Lerp(transform.position, CameraManger.GetCameraTarget.position,
+				_cameraData.FollowSpeed * Time.deltaTime);
+			
+			transform.position = moveToTarget;
+		}
 
+		void PlayerRotate()
+		{
+			LogMessage(CameraManger.GetCameraTarget.eulerAngles.y.ToString());
 		}
 
 		private static void LogMessage(string message)
