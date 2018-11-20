@@ -21,7 +21,7 @@ namespace Physics
 		[SerializeField] private float _forceMultiplyer;
 		[SerializeField] private float _attractRadius;
 
-		void Start()
+		private void Start()
 		{
 			_playerTransform = PlayerManager.PlayerTransform;
 			_playerRigidbody = PlayerManager.PlayerRigidbody;
