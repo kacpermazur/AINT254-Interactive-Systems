@@ -37,6 +37,6 @@ public class CameraController : MonoBehaviour, IInitializable
 
 	private static void LogMessage(string message)
 	{
-		Debug.Log("<color=blue>" + CameraControllerName + "</color> : " + message);
+		Debug.Log("<color=silver>" + CameraControllerName + "</color> : " + message);
 	}
 }

@@ -11,11 +11,10 @@ namespace Camera
         private static readonly string CameraMangerName = typeof(CameraManger).Name;
         private static CameraManger _instance;
 
-        [SerializeField] private Transform _cameraTarget;
-        
-        private Transform _pivot;
-        private Transform _cameraTransform;
-        
+        [SerializeField] private Transform _cameraTarget;   
+        [SerializeField] private Transform _pivot;
+        [SerializeField] private Transform _cameraTransform;
+     
         [SerializeField] private CameraData _cameraDataConfig;
 
         private CameraController _cameraController;
@@ -53,7 +52,10 @@ namespace Camera
         public void Initialize()
         {
             _cameraController = GetComponent<CameraController>();
-            _pivot = _cameraTarget.parent;
+            
+            LogMessage(_cameraTarget.position.ToString());
+            LogMessage(_pivot.position.ToString());
+            LogMessage(_cameraTransform.position.ToString());
         }
 
         private static void LogMessage(string message)
