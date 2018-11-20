@@ -462,7 +462,7 @@ Prefab:
     - target: {fileID: 114283833699250108, guid: 3d5f8a7748cd25c44821d983c8081ec0,
         type: 2}
       propertyPath: _forceMultiplyer
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d5f8a7748cd25c44821d983c8081ec0, type: 2}
@@ -504,6 +504,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2122875548}
+  - component: {fileID: 2122875549}
+  - component: {fileID: 2122875550}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -525,3 +527,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2122875549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2122875547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2701d03e1e78bcb41abca733dcbac99c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraTarget: {fileID: 188070005}
+  _pivot: {fileID: 1829480521}
+  _cameraTransform: {fileID: 534669905}
+  _cameraDataConfig: {fileID: 11400000, guid: 34e24f93b2e7b1145bbc3ee3f5dd3efc, type: 2}
+--- !u!114 &2122875550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2122875547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5d6809a207db244aa68eefc49dda06d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
