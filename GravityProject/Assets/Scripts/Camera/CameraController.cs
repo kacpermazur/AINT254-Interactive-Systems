@@ -4,39 +4,38 @@ using Camera;
 using Camera.Data;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour, IInitializable
+namespace Camera
 {
-	private static readonly string CameraControllerName = typeof(CameraController).Name;
-
-	private CameraData _cameraData;
-	
-	private bool isInitialized;
-	
-	public void Initialize()
+	public class CameraController : MonoBehaviour, IInitializable
 	{
-		if (!isInitialized)
+		private static readonly string CameraControllerName = typeof(CameraController).Name;
+
+		private CameraData _cameraData;
+
+		private bool isInitialized;
+
+		public void Initialize()
 		{
-			_cameraData = CameraManger.CameraDataConfig;
-			isInitialized = true;
+			if (!isInitialized)
+			{
+				_cameraData = CameraManger.CameraDataConfig;
+				isInitialized = true;
+			}
 		}
-	}
 
-	void Update()
-	{
-		if (isInitialized)
+		void Update()
 		{
-			FollowTarget();
+			LogMessage(_cameraData.FollowSpeed.ToString());
 		}
-	}
 
-	private void FollowTarget()
-	{
-		Vector3 moveToTargetPos = Vector3.Lerp(transform.position, CameraManger.CameraTarget.position, _cameraData.FollowSpeed * Time.deltaTime);
-		transform.position = moveToTargetPos;
-	}
+		private void FollowTarget()
+		{
 
-	private static void LogMessage(string message)
-	{
-		Debug.Log("<color=silver>" + CameraControllerName + "</color> : " + message);
+		}
+
+		private static void LogMessage(string message)
+		{
+			Debug.Log("<color=silver>" + CameraControllerName + "</color> : " + message);
+		}
 	}
 }

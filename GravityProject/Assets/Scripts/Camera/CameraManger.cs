@@ -35,7 +35,7 @@ namespace Camera
             }
         }
         
-        public static Transform CameraTarget{ get { return _instance._cameraTarget; }}
+        public static Transform GetCameraTarget{ get { return _instance._cameraTarget; }}
         public static Transform CameraPivot{ get { return _instance._pivot; }}
         public static Transform CameraTransform{ get { return _instance._cameraTransform; }}
 
@@ -56,6 +56,8 @@ namespace Camera
             LogMessage(_cameraTarget.position.ToString());
             LogMessage(_pivot.position.ToString());
             LogMessage(_cameraTransform.position.ToString());
+            
+            _cameraController.Initialize();
         }
 
         private static void LogMessage(string message)
