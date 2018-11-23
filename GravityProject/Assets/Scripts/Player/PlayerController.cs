@@ -12,6 +12,8 @@ namespace Player
 		
 		private PlayerData _playerData;
 
+		public bool isGravityFlipped = false;
+
 		private bool isInitialized;
 
 		[SerializeField] private GameObject _shootLocation;
@@ -60,19 +62,21 @@ namespace Player
 
 		private void GravityFlip()
 		{
-			bool isGravityFlipped = false;
-			
-			if (InputHandler.FlipGravity() && isGravityFlipped == false)
+			if (InputHandler.FlipGravity())
 			{
-
 				Physics.gravity *= -1;
-				
 				PlayerManager.PlayerTransform.Rotate(180, 180, 0);
+				
+				if (!isGravityFlipped)
+				{
+					isGravityFlipped = true;
+				}
+				else
+				{
+					isGravityFlipped = false;
+				}
 			}
-			else
-			{
-				isGravityFlipped = false;
-			}
+			
 		}
 
 		private void Shoot()
