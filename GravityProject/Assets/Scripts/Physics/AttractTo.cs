@@ -15,10 +15,10 @@ namespace Physics
 		private Rigidbody _object;
 		private SphereCollider _collider;
 
-		private Vector3 _direction;
-		private float _force;
 
-		[SerializeField] private float _startSpeed;
+		[SerializeField] private float _shootForce;
+		[SerializeField] private float _currentVelcoity;
+		
 		[SerializeField] private float _forceMultiplyer;
 		[SerializeField] private float _attractRadius;
 		
@@ -32,6 +32,13 @@ namespace Physics
 			_collider = GetComponent<SphereCollider>();
 
 			_collider.radius = _attractRadius;
+			
+			_object.AddForce(transform.forward * 500, ForceMode.Impulse);
+		}
+
+		private void FixedUpdate()
+		{
+			_currentVelcoity = _object.velocity.magnitude;
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -52,10 +59,10 @@ namespace Physics
 
 		private void AttractToObject()
 		{
-			_direction = _object.position - _playerTransform.position;
-			_force = (_object.mass * _playerRigidbody.mass);
+			Vector3 direction = _object.position - _playerTransform.position;
+			float force = (_object.mass * _playerRigidbody.mass);
 
-			_playerRigidbody.AddForce(_direction.normalized * _force * _forceMultiplyer);
+			_playerRigidbody.AddForce(direction.normalized * force * _forceMultiplyer);
 		}
 
 		private static void LogMessage(string message)

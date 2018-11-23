@@ -14,7 +14,7 @@ namespace Player
 
 		private bool isInitialized;
 
-		[SerializeField] private Transform _shootLocation;
+		[SerializeField] private GameObject _shootLocation;
 		[SerializeField] private GameObject _blackHoleBullet;
 		
 		public void Initialize()
@@ -79,7 +79,7 @@ namespace Player
 		{
 			if (InputHandler.Shoot())
 			{
-				Instantiate(_blackHoleBullet, _shootLocation);
+				Instantiate(_blackHoleBullet, _shootLocation.transform.position, Quaternion.identity);
 			}
 		}
 
