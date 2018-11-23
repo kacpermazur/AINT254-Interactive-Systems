@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Camera;
 using Camera.Data;
+using Core.Input;
 using UnityEngine;
 
 namespace Camera
@@ -43,8 +44,11 @@ namespace Camera
 		void PlayerRotate()
 		{
 			CameraManger.CameraPivot.localRotation = Quaternion.Euler(0, CameraManger.GetCameraTarget.transform.eulerAngles.y, 0);
-			
-			
+
+			if (InputHandler.FlipGravity())
+			{
+				CameraManger.CameraPivot.localRotation = Quaternion.Slerp(transform.rotation, CameraManger.GetCameraTarget.transform.rotation, Time.deltaTime * _cameraData.Smoothing);
+			}
 		}
 
 		private static void LogMessage(string message)

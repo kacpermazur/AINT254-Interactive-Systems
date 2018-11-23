@@ -65,7 +65,7 @@ namespace Player
 
 				Physics.gravity *= -1;
 				
-				PlayerManager.PlayerTransform.Rotate(180, 0, 0);
+				PlayerManager.PlayerTransform.Rotate(180, 180, 0);
 			}
 			else
 			{
