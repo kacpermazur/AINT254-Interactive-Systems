@@ -43,6 +43,8 @@ namespace Camera
 		void PlayerRotate()
 		{
 			CameraManger.CameraPivot.localRotation = Quaternion.Euler(0, CameraManger.GetCameraTarget.transform.eulerAngles.y, 0);
+			
+			
 		}
 
 		private static void LogMessage(string message)
