@@ -18,8 +18,10 @@ namespace Physics
 		private Vector3 _direction;
 		private float _force;
 
+		[SerializeField] private float _startSpeed;
 		[SerializeField] private float _forceMultiplyer;
 		[SerializeField] private float _attractRadius;
+		
 
 		private void Start()
 		{

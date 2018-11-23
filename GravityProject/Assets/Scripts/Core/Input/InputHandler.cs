@@ -26,7 +26,7 @@
 
         public static bool Shoot()
         {
-            return Input.GetKeyDown("Fire1");
+            return Input.GetKeyDown(KeyCode.Mouse0);
         }
     }
 }

@@ -13,8 +13,9 @@ namespace Player
 		private PlayerData _playerData;
 
 		private bool isInitialized;
-		
-		public bool isGravityFlipped;
+
+		[SerializeField] private Transform _shootLocation;
+		[SerializeField] private GameObject _blackHoleBullet;
 		
 		public void Initialize()
 		{
@@ -31,6 +32,7 @@ namespace Player
 			{
 				Jump();
 				GravityFlip();
+				Shoot();
 			}
 		}
 		
@@ -58,7 +60,7 @@ namespace Player
 
 		private void GravityFlip()
 		{
-			isGravityFlipped = false;
+			bool isGravityFlipped = false;
 			
 			if (InputHandler.FlipGravity() && isGravityFlipped == false)
 			{
@@ -70,6 +72,14 @@ namespace Player
 			else
 			{
 				isGravityFlipped = false;
+			}
+		}
+
+		private void Shoot()
+		{
+			if (InputHandler.Shoot())
+			{
+				Instantiate(_blackHoleBullet, _shootLocation);
 			}
 		}
 
