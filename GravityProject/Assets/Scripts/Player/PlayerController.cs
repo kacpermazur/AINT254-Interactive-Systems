@@ -15,7 +15,6 @@ namespace Player
 		private bool isInitialized;
 		
 		public bool isGravityFlipped;
-		public float rate = 0.1f;
 		
 		public void Initialize()
 		{
@@ -63,9 +62,8 @@ namespace Player
 			
 			if (InputHandler.FlipGravity() && isGravityFlipped == false)
 			{
-				isGravityFlipped = true;
-				
-				Physics.gravity *= -1 * rate;
+
+				Physics.gravity *= -1;
 				
 				PlayerManager.PlayerTransform.Rotate(180, 0, 0);
 			}
