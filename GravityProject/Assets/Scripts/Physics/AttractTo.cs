@@ -1,4 +1,5 @@
-﻿using Physics.Data;
+﻿using System.Collections;
+using Physics.Data;
 using UnityEngine;
 using Player;
 
@@ -45,6 +46,8 @@ namespace Physics
 
 			State = ObjectState.Spawned;
 			_object.AddForce(Vector3.forward * 500, ForceMode.Impulse);
+
+			StartCoroutine(CheckAfterForceDecay());
 			
 			LogMessage(State.ToString());
 		}
@@ -93,10 +96,7 @@ namespace Physics
 
 			if (State == ObjectState.Moving)
 			{
-				if (_object.velocity.magnitude < minStopVelocity)
-				{
-					State = ObjectState.Stop;
-				}
+				LogMessage("Bullet is Moving");
 			}
 			
 			if (State == ObjectState.Stop)
@@ -111,6 +111,16 @@ namespace Physics
 				Destroy(gameObject);
 				
 				LogMessage(State.ToString());
+			}
+		}
+
+		IEnumerator CheckAfterForceDecay()
+		{
+			yield return new WaitForSeconds(2f);
+			
+			if (_object.velocity.magnitude < minStopVelocity )
+			{
+				State = ObjectState.Stop;
 			}
 		}
 

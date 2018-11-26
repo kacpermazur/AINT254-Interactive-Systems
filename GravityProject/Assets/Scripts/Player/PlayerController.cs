@@ -18,7 +18,7 @@ namespace Player
 
 		private bool isInitialized;
 		
-		private int _currentSelection = 0;
+		private bool _canShoot = true;
 		private AttractTo _currentSelectedBullet = null;
 
 		[SerializeField] private GameObject _shootLocation;
@@ -86,6 +86,29 @@ namespace Player
 
 		private void Shoot()
 		{
+			if (InputHandler.Shoot())
+			{
+				if (_canShoot)
+				{
+					_canShoot = false;
+					Instantiate(_blackHoleBullet, _shootLocation.transform.position, Quaternion.identity);
+					_currentSelectedBullet = GameObject.FindWithTag("Bullet").GetComponent<AttractTo>();
+				}
+
+				if (_currentSelectedBullet.State == AttractTo.ObjectState.Moving)
+				{
+					LogMessage(_currentSelectedBullet.State.ToString());
+					
+					_currentSelectedBullet.State = AttractTo.ObjectState.Stop;
+				}
+				else if (_currentSelectedBullet.State == AttractTo.ObjectState.Stop)
+				{
+					LogMessage(_currentSelectedBullet.State.ToString());
+					_currentSelectedBullet.State = AttractTo.ObjectState.Destory;
+				}
+				
+			}
+			
 		/*
 			if (InputHandler.Shoot())
 			{
