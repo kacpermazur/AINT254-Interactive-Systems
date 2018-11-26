@@ -18,12 +18,14 @@ namespace Physics
 
 		[SerializeField] private float _shootForce;
 		[SerializeField] private float _currentVelcoity;
+		[SerializeField] private float minStopVelocity = 01f;
 		
 		[SerializeField] private float _forceMultiplyer;
 		[SerializeField] private float _attractRadius;
 
 		public enum ObjectState
 		{
+			Spawned,
 			Moving,
 			Stop,
 			Destory
@@ -41,18 +43,20 @@ namespace Physics
 
 			_collider.radius = _attractRadius;
 
-			State = ObjectState.Moving;
-			_object.AddForce(transform.forward * 500, ForceMode.Impulse);
+			State = ObjectState.Spawned;
+			_object.AddForce(Vector3.forward * 500, ForceMode.Impulse);
+			
 			LogMessage(State.ToString());
 		}
-
-		private void FixedUpdate()
-		{
-			_currentVelcoity = _object.velocity.magnitude;
-		}
-
+		
 		private void Update()
 		{
+			if (State == ObjectState.Spawned)
+			{
+				State = ObjectState.Moving;
+				_currentVelcoity = _object.velocity.magnitude;
+			}
+			
 			CheckForStateUpdate();
 		}
 
@@ -91,7 +95,6 @@ namespace Physics
 			
 			if (State == ObjectState.Stop)
 			{
-				State = ObjectState.Stop;
 				_object.velocity = Vector3.zero;
 				
 				LogMessage(State.ToString());
@@ -100,6 +103,7 @@ namespace Physics
 			if (State == ObjectState.Destory)
 			{
 				Destroy(gameObject);
+				
 				LogMessage(State.ToString());
 			}
 		}
