@@ -40,6 +40,11 @@ namespace Player
 				Jump();
 				GravityFlip();
 				Shoot();
+
+				if (_currentSelection > 0)
+				{
+					CheckIfBulletIsDestroyed(_currentSelectedBullet);
+				}
 			}
 		}
 		
@@ -122,6 +127,14 @@ namespace Player
 			}
 		}
 
+		private void CheckIfBulletIsDestroyed(AttractTo currentBullet)
+		{
+			if (currentBullet == null)
+			{
+				_currentSelection = 0;
+			}
+		}
+		
 		private bool IsGrounded()
 		{
 			RaycastHit distanceFromPlayer;

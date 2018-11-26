@@ -60,7 +60,10 @@ namespace Physics
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				//Destroy(gameObject, 1);
+				if (State == ObjectState.Stop)
+				{
+					Destroy(gameObject, 1);
+				}
 			}
 		}
 
@@ -68,7 +71,10 @@ namespace Physics
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				//AttractToObject();
+				if (State == ObjectState.Stop)
+				{
+					AttractToObject();
+				}
 			}
 		}
 
@@ -82,7 +88,6 @@ namespace Physics
 
 		private void CheckForStateUpdate()
 		{
-			float maximumLowestSpeed = 0.1f; 
 			
 			if (State == ObjectState.Stop)
 			{
