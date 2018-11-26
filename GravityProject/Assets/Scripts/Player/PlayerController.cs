@@ -17,6 +17,9 @@ namespace Player
 		public bool isGravityFlipped = false;
 
 		private bool isInitialized;
+		
+		private int _currentSelection = 0;
+		private AttractTo _currentSelectedBullet = null;
 
 		[SerializeField] private GameObject _shootLocation;
 		[SerializeField] private GameObject _blackHoleBullet;
@@ -83,36 +86,33 @@ namespace Player
 
 		private void Shoot()
 		{
-			int currentSelection = 0;
-			
-			AttractTo currentSelectedBullet = null;
 
 			if (InputHandler.Shoot())
 			{
-				if (currentSelection == 0)
+				if (_currentSelection == 0)
 				{
-					LogMessage("selection : " + currentSelection.ToString());
+					LogMessage("selection : " + _currentSelection.ToString());
 					
+					_currentSelection += 1;
 					Instantiate(_blackHoleBullet, _shootLocation.transform.position, Quaternion.identity);
-					currentSelectedBullet = GameObject.FindWithTag("Bullet").GetComponent<AttractTo>();
-					currentSelection = 1;
+					_currentSelectedBullet = GameObject.FindWithTag("Bullet").GetComponent<AttractTo>();
 					
-					LogMessage(currentSelectedBullet.ToString());
+					LogMessage(_currentSelectedBullet.ToString());
 				}
-				else if (currentSelection == 1)
+				else if (_currentSelection == 1)
 				{
-					LogMessage("selection : " + currentSelection.ToString());
+					LogMessage("selection : " + _currentSelection.ToString());
 
-					currentSelectedBullet.State = AttractTo.ObjectState.Stop;
-					currentSelection = 2;
+					_currentSelection += 1;
+					_currentSelectedBullet.State = AttractTo.ObjectState.Stop;
 				}
-				else if (currentSelection == 2)
+				else if (_currentSelection == 2)
 				{
-					LogMessage("selection : " + currentSelection.ToString());
+					LogMessage("selection : " + _currentSelection.ToString());
 
-					currentSelectedBullet.State = AttractTo.ObjectState.Destory;
-					currentSelectedBullet = null;
-					currentSelection = 0;
+					_currentSelection = 0;
+					_currentSelectedBullet.State = AttractTo.ObjectState.Destory;
+					_currentSelectedBullet = null;
 				}
 				else
 				{

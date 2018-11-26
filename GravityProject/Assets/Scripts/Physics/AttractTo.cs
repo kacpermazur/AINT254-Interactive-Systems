@@ -68,7 +68,7 @@ namespace Physics
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				AttractToObject();
+				//AttractToObject();
 			}
 		}
 
