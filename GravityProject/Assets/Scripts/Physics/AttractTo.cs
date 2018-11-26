@@ -18,7 +18,7 @@ namespace Physics
 
 		[SerializeField] private float _shootForce;
 		[SerializeField] private float _currentVelcoity;
-		[SerializeField] private float minStopVelocity = 01f;
+		[SerializeField] private float minStopVelocity = 0.1f;
 		
 		[SerializeField] private float _forceMultiplyer;
 		[SerializeField] private float _attractRadius;
@@ -51,13 +51,7 @@ namespace Physics
 		
 		private void Update()
 		{
-			if (State == ObjectState.Spawned)
-			{
-				State = ObjectState.Moving;
-				_currentVelcoity = _object.velocity.magnitude;
-			}
-			
-			CheckForStateUpdate();
+			CheckAndUpdateStates();
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -90,8 +84,20 @@ namespace Physics
 			_playerRigidbody.AddForce(direction.normalized * force * _forceMultiplyer);
 		}
 
-		private void CheckForStateUpdate()
+		private void CheckAndUpdateStates()
 		{
+			if (State == ObjectState.Spawned)
+			{
+				State = ObjectState.Moving;
+			}
+
+			if (State == ObjectState.Moving)
+			{
+				if (_object.velocity.magnitude < minStopVelocity)
+				{
+					State = ObjectState.Stop;
+				}
+			}
 			
 			if (State == ObjectState.Stop)
 			{
