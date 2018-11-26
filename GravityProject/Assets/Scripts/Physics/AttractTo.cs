@@ -52,12 +52,7 @@ namespace Physics
 
 		private void Update()
 		{
-			float maximumLowestSpeed = 0.1f; 
-			
-			if (_currentVelcoity < maximumLowestSpeed)
-			{
-				
-			}
+			CheckForStateUpdate();
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -82,6 +77,22 @@ namespace Physics
 			float force = (_object.mass * _playerRigidbody.mass);
 
 			_playerRigidbody.AddForce(direction.normalized * force * _forceMultiplyer);
+		}
+
+		private void CheckForStateUpdate()
+		{
+			float maximumLowestSpeed = 0.1f; 
+			
+			if (_currentVelcoity < maximumLowestSpeed || State == ObjectState.Stop)
+			{
+				State = ObjectState.Stop;
+				_object.velocity = Vector3.zero;
+			}
+
+			if (State == ObjectState.Destory)
+			{
+				Destroy(gameObject);
+			}
 		}
 
 		private static void LogMessage(string message)
