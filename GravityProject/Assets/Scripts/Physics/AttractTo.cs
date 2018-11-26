@@ -84,7 +84,7 @@ namespace Physics
 		{
 			float maximumLowestSpeed = 0.1f; 
 			
-			if (_currentVelcoity < maximumLowestSpeed || State == ObjectState.Stop)
+			if (State == ObjectState.Stop)
 			{
 				State = ObjectState.Stop;
 				_object.velocity = Vector3.zero;
