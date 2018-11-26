@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114283833699250108}
   m_Layer: 0
   m_Name: blackHole
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   _currentVelcoity: 0
   _forceMultiplyer: 1
   _attractRadius: 7
+  State: 0
 --- !u!135 &135046730703635656
 SphereCollider:
   m_ObjectHideFlags: 1

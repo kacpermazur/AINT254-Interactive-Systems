@@ -1,6 +1,8 @@
 ﻿using System.Runtime.InteropServices.WindowsRuntime;
 using Core.Input;
+using Physics;
 using Player.Data;
+using UnityEditor;
 
 namespace Player
 {
@@ -81,9 +83,42 @@ namespace Player
 
 		private void Shoot()
 		{
+			int currentSelection = 0;
+			
+			AttractTo currentSelectedBullet = null;
+
 			if (InputHandler.Shoot())
 			{
-				Instantiate(_blackHoleBullet, _shootLocation.transform.position, Quaternion.identity);
+				if (currentSelection == 0)
+				{
+					LogMessage("selection : " + currentSelection.ToString());
+					
+					Instantiate(_blackHoleBullet, _shootLocation.transform.position, Quaternion.identity);
+					currentSelectedBullet = GameObject.FindWithTag("Bullet").GetComponent<AttractTo>();
+					currentSelection = 1;
+					
+					LogMessage(currentSelectedBullet.ToString());
+				}
+				else if (currentSelection == 1)
+				{
+					LogMessage("selection : " + currentSelection.ToString());
+
+					currentSelectedBullet.State = AttractTo.ObjectState.Stop;
+					currentSelection = 2;
+				}
+				else if (currentSelection == 2)
+				{
+					LogMessage("selection : " + currentSelection.ToString());
+
+					currentSelectedBullet.State = AttractTo.ObjectState.Destory;
+					currentSelectedBullet = null;
+					currentSelection = 0;
+				}
+				else
+				{
+					LogMessage("Shoot : Checking Shooting");
+				}
+
 			}
 		}
 
