@@ -21,7 +21,15 @@ namespace Physics
 		
 		[SerializeField] private float _forceMultiplyer;
 		[SerializeField] private float _attractRadius;
-		
+
+		public enum ObjectState
+		{
+			Moving,
+			Stop,
+			Destory
+		}
+
+		public ObjectState State;
 
 		private void Start()
 		{
@@ -32,13 +40,24 @@ namespace Physics
 			_collider = GetComponent<SphereCollider>();
 
 			_collider.radius = _attractRadius;
-			
+
+			State = ObjectState.Moving;
 			_object.AddForce(transform.forward * 500, ForceMode.Impulse);
 		}
 
 		private void FixedUpdate()
 		{
 			_currentVelcoity = _object.velocity.magnitude;
+		}
+
+		private void Update()
+		{
+			float maximumLowestSpeed = 0.1f; 
+			
+			if (_currentVelcoity < maximumLowestSpeed)
+			{
+				
+			}
 		}
 
 		private void OnTriggerEnter(Collider other)
