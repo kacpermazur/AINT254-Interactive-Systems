@@ -43,6 +43,7 @@ namespace Physics
 
 			State = ObjectState.Moving;
 			_object.AddForce(transform.forward * 500, ForceMode.Impulse);
+			LogMessage(State.ToString());
 		}
 
 		private void FixedUpdate()
@@ -59,7 +60,7 @@ namespace Physics
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				Destroy(gameObject, 1);
+				//Destroy(gameObject, 1);
 			}
 		}
 
@@ -87,11 +88,14 @@ namespace Physics
 			{
 				State = ObjectState.Stop;
 				_object.velocity = Vector3.zero;
+				
+				LogMessage(State.ToString());
 			}
 
 			if (State == ObjectState.Destory)
 			{
 				Destroy(gameObject);
+				LogMessage(State.ToString());
 			}
 		}
 
