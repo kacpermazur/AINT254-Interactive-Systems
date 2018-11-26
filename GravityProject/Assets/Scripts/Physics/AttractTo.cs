@@ -63,7 +63,7 @@ namespace Physics
 			{
 				if (State == ObjectState.Stop)
 				{
-					Destroy(gameObject, 1);
+					Destroy(gameObject, 0.3f);
 				}
 			}
 		}

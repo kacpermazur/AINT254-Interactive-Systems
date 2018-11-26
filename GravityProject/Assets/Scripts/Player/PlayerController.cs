@@ -40,6 +40,8 @@ namespace Player
 				Jump();
 				GravityFlip();
 				Shoot();
+
+				CheckIfObjectGotDestroyed(_currentSelectedBullet);
 			}
 		}
 		
@@ -105,44 +107,19 @@ namespace Player
 				{
 					LogMessage(_currentSelectedBullet.State.ToString());
 					_currentSelectedBullet.State = AttractTo.ObjectState.Destory;
-				}
-				
-			}
-			
-		/*
-			if (InputHandler.Shoot())
-			{
-				if (_currentSelection == 0)
-				{
-					LogMessage("selection : " + _currentSelection.ToString());
 					
-					_currentSelection += 1;
-					Instantiate(_blackHoleBullet, _shootLocation.transform.position, Quaternion.identity);
-					_currentSelectedBullet = GameObject.FindWithTag("Bullet").GetComponent<AttractTo>();
-					
-					LogMessage(_currentSelectedBullet.ToString());
-				}
-				else if (_currentSelection == 1)
-				{
-					LogMessage("selection : " + _currentSelection.ToString());
-
-					_currentSelection += 1;
-					_currentSelectedBullet.State = AttractTo.ObjectState.Stop;
-				}
-				else if (_currentSelection == 2)
-				{
-					LogMessage("selection : " + _currentSelection.ToString());
-
-					_currentSelection = 0;
-					_currentSelectedBullet.State = AttractTo.ObjectState.Destory;
 					_currentSelectedBullet = null;
-				}
-				else
-				{
-					LogMessage("Shoot : Checking Shooting");
+					_canShoot = true;
 				}
 			}
-			*/
+		}
+
+		private void CheckIfObjectGotDestroyed(AttractTo currentBullet)
+		{
+			if (currentBullet == null)
+			{
+				_canShoot = true;
+			}
 		}
 		
 		private bool IsGrounded()

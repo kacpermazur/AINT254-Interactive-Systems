@@ -127,7 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootForce: 0
   _currentVelcoity: 0
-  _forceMultiplyer: 1
+  minStopVelocity: 1
+  _forceMultiplyer: 2
   _attractRadius: 7
   State: 0
 --- !u!135 &135046730703635656
