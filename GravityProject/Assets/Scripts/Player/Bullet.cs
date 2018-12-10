@@ -52,7 +52,7 @@ namespace Player
 			switch (_currentState)
 			{
 				case BulletState.MOVING:
-					_bullet.AddForce(Vector3.forward * _shootForce, ForceMode.Impulse);
+					_bullet.AddRelativeForce(Vector3.forward  * _shootForce, ForceMode.Impulse);
 					LogMessage(_currentState.ToString());
 					break;
 				case BulletState.STOP:
@@ -69,6 +69,7 @@ namespace Player
 					
 			}
 		}
+		
 
 		private IEnumerator CheckVelocity()
 		{

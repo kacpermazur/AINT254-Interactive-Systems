@@ -47,18 +47,22 @@ namespace Camera
 		void PlayerRotate()
 		{
 			CameraManger.CameraPivot.localRotation = Quaternion.Euler(0, CameraManger.GetCameraTarget.transform.eulerAngles.y, 0);
-			float newZ = CameraManger.CameraPivotZ.localEulerAngles.z;
+			float rotNewZ = CameraManger.CameraPivotZ.localEulerAngles.z;
+			float posNewZ = 1.92f;
 			
 			if (_pc.isGravityFlipped)
 			{
-				newZ = Mathf.Lerp(newZ, 180, Time.deltaTime * _cameraData.Smoothing);
+				rotNewZ = Mathf.Lerp(rotNewZ, 180, Time.deltaTime * _cameraData.Smoothing);
+				posNewZ = -1.92f;
 			}
 			else
 			{
-				newZ = Mathf.Lerp(newZ, 0, Time.deltaTime * _cameraData.Smoothing);
+				rotNewZ = Mathf.Lerp(rotNewZ, 0, Time.deltaTime * _cameraData.Smoothing);
+				posNewZ = 1.92f;
 			}
-			
-			CameraManger.CameraPivotZ.localEulerAngles = new Vector3(0,0, newZ);
+		
+			CameraManger.CameraPivotZ.localEulerAngles = new Vector3(0,0, rotNewZ);
+			CameraManger.CameraPivotZ.transform.localPosition = new Vector3(0 , posNewZ, -3.452f);
 		}
 
 		private static void LogMessage(string message)

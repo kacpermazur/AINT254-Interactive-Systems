@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4720080331589442}
   - component: {fileID: 33505474736121686}
   - component: {fileID: 23757203120412672}
-  - component: {fileID: 65378590469620684}
   - component: {fileID: 54535772095704818}
   - component: {fileID: 135046730703635656}
   - component: {fileID: 114283833699250108}
+  - component: {fileID: 114986624641752836}
   m_Layer: 0
   m_Name: blackHole
   m_TagString: Bullet
@@ -100,20 +100,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65378590469620684
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1711559707839956}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114283833699250108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,12 +113,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca1cfd8f9247614f93dfe210987058d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shootForce: 0
-  _currentVelcoity: 0
-  minStopVelocity: 1
   _forceMultiplyer: 2
   _attractRadius: 7
-  State: 0
+--- !u!114 &114986624641752836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1711559707839956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f603b4e1cf62e147a9449cd0a03d15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shootForce: 5
 --- !u!135 &135046730703635656
 SphereCollider:
   m_ObjectHideFlags: 1
