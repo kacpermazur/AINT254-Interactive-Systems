@@ -90,27 +90,14 @@ namespace Player
 		{
 			if (InputHandler.Shoot())
 			{
+				/*
 				if (_canShoot)
 				{
 					_canShoot = false;
 					Instantiate(_blackHoleBullet, _shootLocation.transform.position, Quaternion.identity);
 					_currentSelectedBullet = GameObject.FindWithTag("Bullet").GetComponent<AttractTo>();
 				}
-
-				if (_currentSelectedBullet.State == AttractTo.ObjectState.Moving)
-				{
-					LogMessage(_currentSelectedBullet.State.ToString());
-					
-					_currentSelectedBullet.State = AttractTo.ObjectState.Stop;
-				}
-				else if (_currentSelectedBullet.State == AttractTo.ObjectState.Stop)
-				{
-					LogMessage(_currentSelectedBullet.State.ToString());
-					_currentSelectedBullet.State = AttractTo.ObjectState.Destory;
-					
-					_currentSelectedBullet = null;
-					_canShoot = true;
-				}
+				*/
 			}
 		}
 
