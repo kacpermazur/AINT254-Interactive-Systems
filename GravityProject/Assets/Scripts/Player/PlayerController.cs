@@ -15,14 +15,15 @@ namespace Player
 		private PlayerData _playerData;
 
 		public bool isGravityFlipped = false;
-
-		private bool isInitialized;
 		
-		private bool _canShoot = true;
-		private AttractTo _currentSelectedBullet = null;
+		private bool isInitialized;
 
 		[SerializeField] private GameObject _shootLocation;
 		[SerializeField] private GameObject _blackHoleBullet;
+		
+		//temp
+		public GameObject bullet;
+		public bool canSpawn = false;
 		
 		public void Initialize()
 		{
@@ -40,8 +41,8 @@ namespace Player
 				Jump();
 				GravityFlip();
 				Shoot();
+				CheckBulletDestoryed();
 
-				CheckIfObjectGotDestroyed(_currentSelectedBullet);
 			}
 		}
 		
@@ -88,24 +89,36 @@ namespace Player
 
 		private void Shoot()
 		{
+			//ToDo: Move This Out 
+			
 			if (InputHandler.Shoot())
 			{
-				/*
-				if (_canShoot)
+				if (canSpawn)
 				{
-					_canShoot = false;
-					Instantiate(_blackHoleBullet, _shootLocation.transform.position, Quaternion.identity);
-					_currentSelectedBullet = GameObject.FindWithTag("Bullet").GetComponent<AttractTo>();
+					bullet = Instantiate(_blackHoleBullet, _shootLocation.transform.position,
+						Quaternion.identity);
+					
+					canSpawn = false;
 				}
-				*/
+				
+				if (bullet.GetComponent<Bullet>().GetBulletState() == Bullet.BulletState.MOVING)
+				{
+					bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.STOP);
+				}
+				else if (bullet.GetComponent<Bullet>().GetBulletState() == Bullet.BulletState.STOP)
+				{
+					bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
+					canSpawn = true;
+				}
+				
 			}
 		}
 
-		private void CheckIfObjectGotDestroyed(AttractTo currentBullet)
+		private void CheckBulletDestoryed()
 		{
-			if (currentBullet == null)
+			if (bullet == null)
 			{
-				_canShoot = true;
+				canSpawn = true;
 			}
 		}
 		

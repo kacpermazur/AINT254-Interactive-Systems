@@ -15,7 +15,7 @@ namespace Physics
 		private Rigidbody _object;
 		private SphereCollider _collider;
 
-		private Shoot _shoot;
+		private Bullet _bullet;
 
 		private Vector3 _direction;
 		private float _force;
@@ -28,7 +28,7 @@ namespace Physics
 			_playerTransform = PlayerManager.PlayerTransform;
 			_playerRigidbody = PlayerManager.PlayerRigidbody;
 
-			_shoot = GetComponent<Shoot>();
+			_bullet = GetComponent<Bullet>();
 			
 			_object = GetComponent<Rigidbody>();
 			_collider = GetComponent<SphereCollider>();
@@ -42,9 +42,9 @@ namespace Physics
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				if (_shoot.GetBulletState() == Shoot.BulletState.STOP)
+				if (_bullet.GetBulletState() == Bullet.BulletState.STOP)
 				{
-					float deathTimer = 1f;
+					float deathTimer = 0.4f;;
 					Destroy(gameObject, deathTimer);
 				}
 			}
@@ -54,7 +54,7 @@ namespace Physics
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				if (_shoot.GetBulletState() == Shoot.BulletState.STOP)
+				if (_bullet.GetBulletState() == Bullet.BulletState.STOP)
 				{
 					AttractToObject();
 				}
