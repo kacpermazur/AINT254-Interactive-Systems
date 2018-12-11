@@ -2,21 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Sound
+namespace Core.Audio
 {
-	public class SoundManger : MonoBehaviour
+	public class SoundManger : MonoBehaviour, IInitializable
 	{
-
-		// Use this for initialization
-		void Start()
+		private static readonly string SoundMangerName = typeof(SoundManger).Name;
+		private static  SoundManger _instance;
+		
+		private void Awake()
 		{
-
+			Initialize();
+		}
+		
+		public void Initialize()
+		{
+			if (_instance == null)
+			{
+				_instance = this;
+			}
 		}
 
-		// Update is called once per frame
-		void Update()
+		private static void LogMessage(string message)
 		{
-
+			Debug.Log("<color=blue>" + SoundMangerName + "</color> : " + message);
 		}
 	}
 }
