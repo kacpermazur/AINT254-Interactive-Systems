@@ -3,16 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Core.Audio
 {
 	public class SoundManger : MonoBehaviour, IInitializable
 	{
 		private static readonly string SoundMangerName = typeof(SoundManger).Name;
-		private static SoundManger _instance;
+		public static SoundManger instance;
 
-		private AudioSource _audioSourceMusic;
-		private AudioSource _audioSourceSfx;
+		[SerializeField] private AudioSource _audioSourceMusic;
+		[SerializeField] private AudioSource _audioSourceSfx;
 		
 		//testing
 		public enum GameMode
@@ -27,6 +28,14 @@ namespace Core.Audio
 			MUSIC,
 			UI,
 		}
+		
+		// Static: Sound can be played from any location
+		// Dynamic: Sound can be played from specific location
+		public enum SoundMode
+		{
+			STATIC,
+			DYANMIC
+		}
 
 		[SerializeField] private SoundClip[] _soundSfx;
 		[SerializeField] private SoundClip[] _soundMusic;
@@ -37,22 +46,16 @@ namespace Core.Audio
 			Initialize();
 		}
 
-		private void Update()
-		{
-			
-		}
-
 		public void Initialize()
 		{
-			if (_instance == null)
+			if (instance == null)
 			{
-				_instance = this;
+				instance = this;
 			}
-
-			_audioSourceMusic = gameObject.AddComponent<AudioSource>();
-			_audioSourceSfx = gameObject.AddComponent<AudioSource>();
-
+			
 			DontDestroyOnLoad(this);
+			
+			
 		}
 
 		public void PlaySound(string name, SoundType type)
@@ -83,8 +86,45 @@ namespace Core.Audio
 			}	
 		}
 
-		private void SetAudioSettings(ref AudioSource source, SoundClip sound)
+		public void PlaySound(string name, SoundType type, SoundMode mode)
 		{
+			SoundClip selectedSound;
+			
+			switch (type)
+			{
+				case SoundType.SFX:
+					selectedSound = Array.Find(_soundSfx, SoundClip => SoundClip.Name == name);
+					SetAudioSettings(ref _audioSourceSfx, selectedSound);
+					_audioSourceSfx.Play();
+					break;
+				case SoundType.MUSIC:
+					selectedSound = Array.Find(_soundMusic, SoundClip => SoundClip.Name == name);
+					SetAudioSettings(ref _audioSourceMusic, selectedSound);
+					_audioSourceMusic.Play();
+					break;
+				case SoundType.UI:
+					selectedSound = Array.Find(_soundUi, SoundClip => SoundClip.Name == name);
+					SetAudioSettings(ref _audioSourceSfx, selectedSound);
+					_audioSourceSfx.Play();
+					break;
+				default:
+					selectedSound = null;
+					LogMessage("Sound Not Found");
+					return;
+			}	
+		}
+
+		private void SetAudioSettings(SoundClip sound, SoundType type)
+		{
+			switch (type)
+			{
+					case SoundType.SFX:
+						sound.Source = gameObject.AddComponent<AudioSource>();
+						sound.Source.outputAudioMixerGroup = _soundSfx[1];
+			}
+			
+			sound.Source = gameObject.AddComponent<AudioSource>();
+			
 			source.clip = sound.Audio;
 			source.loop = sound.Loop;
 			source.volume = sound.Volume;

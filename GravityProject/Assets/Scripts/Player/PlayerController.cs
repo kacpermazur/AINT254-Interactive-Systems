@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices.WindowsRuntime;
+using Core.Audio;
 using Core.Input;
 using Physics;
 using Player.Data;
@@ -19,7 +20,7 @@ namespace Player
 		private bool isInitialized;
 
 		[SerializeField] private GameObject _shootLocation;
-		[SerializeField] private GameObject _blackHoleBullet;
+		[SerializeField] private GameObject _blackHoleBullet;	
 		
 		//temp
 		public GameObject bullet;
@@ -27,6 +28,8 @@ namespace Player
 		
 		public void Initialize()
 		{
+			//SoundManger.instance.PlaySound("dab", SoundManger.SoundType.MUSIC);
+			
 			if (!isInitialized)
 			{
 				_playerData = PlayerManager.PlayerDataConfig;
@@ -89,7 +92,8 @@ namespace Player
 
 		private void Shoot()
 		{
-			//ToDo: Move This Out 
+			//ToDo: Move This Out
+			
 			
 			if (InputHandler.Shoot())
 			{

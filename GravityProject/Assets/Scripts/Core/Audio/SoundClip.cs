@@ -16,5 +16,7 @@ namespace Core.Audio
         [Range(0.0f, 1.0f)] public float Volume;
         [Range(0.0f, 1.0f)] public float Pitch;
         [Range(0.0f, 1.0f)] public float SpacialBlend;
+
+        [HideInInspector] public AudioSource Source;
     }
 }
