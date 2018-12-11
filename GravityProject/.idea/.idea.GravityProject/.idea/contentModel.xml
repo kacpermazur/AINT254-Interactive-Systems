@@ -178,6 +178,9 @@
             </e>
           </e>
           <e p="Core" t="Include">
+            <e p="Audio" t="Include">
+              <e p="SoundManger.cs" t="Include" />
+            </e>
             <e p="Initializable.cs" t="Include" />
             <e p="Input" t="Include">
               <e p="InputHandler.cs" t="Include" />
