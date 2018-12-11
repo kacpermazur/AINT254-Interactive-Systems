@@ -96,7 +96,7 @@ namespace Player
 				if (canSpawn)
 				{
 					bullet = Instantiate(_blackHoleBullet, _shootLocation.transform.position,
-						Quaternion.identity);
+						transform.rotation);
 					
 					canSpawn = false;
 				}
