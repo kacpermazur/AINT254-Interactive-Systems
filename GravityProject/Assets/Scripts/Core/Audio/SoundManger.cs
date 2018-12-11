@@ -63,17 +63,17 @@ namespace Core.Audio
 			{
 					case SoundType.SFX:
 						selectedSound = Array.Find(_soundSfx, SoundClip => SoundClip.Name == name);
-						_audioSourceSfx.clip = selectedSound.Audio;
+						SetAudioSettings(ref _audioSourceSfx, selectedSound);
 						_audioSourceSfx.Play();
 						break;
 					case SoundType.MUSIC:
 						selectedSound = Array.Find(_soundMusic, SoundClip => SoundClip.Name == name);
-						_audioSourceMusic.clip = selectedSound.Audio;
+						SetAudioSettings(ref _audioSourceMusic, selectedSound);
 						_audioSourceMusic.Play();
 						break;
 					case SoundType.UI:
 						selectedSound = Array.Find(_soundUi, SoundClip => SoundClip.Name == name);
-						_audioSourceSfx.clip = selectedSound.Audio;
+						SetAudioSettings(ref _audioSourceSfx, selectedSound);
 						_audioSourceSfx.Play();
 						break;
 					default:
@@ -82,6 +82,16 @@ namespace Core.Audio
 						return;
 			}	
 		}
+
+		private void SetAudioSettings(ref AudioSource source, SoundClip sound)
+		{
+			source.clip = sound.Audio;
+			source.loop = sound.Loop;
+			source.volume = sound.Volume;
+			sound.Pitch = sound.Pitch;
+			source.spatialBlend = sound.SpacialBlend;
+		}
+		
 		
 		private static void LogMessage(string message)
 		{
