@@ -9,6 +9,8 @@ namespace Core.Audio
 		private static readonly string SoundMangerName = typeof(SoundManger).Name;
 		private static  SoundManger _instance;
 		
+		
+		
 		private void Awake()
 		{
 			Initialize();
