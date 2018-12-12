@@ -15,6 +15,8 @@ namespace Player
 		
 		private PlayerData _playerData;
 
+		[SerializeField] private Transform playerSpawn;
+
 		public bool isGravityFlipped = false;
 		
 		private bool isInitialized;
@@ -54,6 +56,11 @@ namespace Player
 			{
 				Movement();
 			}
+		}
+
+		public void SpawnPlayer()
+		{
+			transform.position = playerSpawn.position;
 		}
 		
 		private void Movement()

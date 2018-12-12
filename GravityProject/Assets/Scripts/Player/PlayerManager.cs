@@ -33,9 +33,10 @@ namespace Player
 		}
 
 		public static Transform PlayerTransform{ get { return _instance.transform; }}
+		
 		public static Rigidbody PlayerRigidbody{ get { return _instance._rigidbody; }}
 
-		public PlayerController PlayerController{ get { return _instance._playerController; }}
+		public static PlayerController PlayerController{ get { return _instance._playerController; }}
 
 		void Awake()
 		{
