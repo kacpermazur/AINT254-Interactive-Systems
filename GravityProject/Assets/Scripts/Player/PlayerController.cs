@@ -28,7 +28,6 @@ namespace Player
 		
 		public void Initialize()
 		{
-			//SoundManger.instance.PlaySound("dab", SoundManger.SoundType.MUSIC);
 			
 			if (!isInitialized)
 			{
@@ -67,7 +66,7 @@ namespace Player
 		{
 			if (InputHandler.Jump() && IsGrounded())
 			{
-				PlayerManager.PlayerRigidbody.AddForce(Vector3.up * _playerData.JumpPower * Time.deltaTime);
+				PlayerManager.PlayerRigidbody.AddForce(transform.up * _playerData.JumpPower * Time.deltaTime);
 			}
 		}
 

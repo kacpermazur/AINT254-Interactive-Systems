@@ -86,51 +86,14 @@ namespace Core.Audio
 			}	
 		}
 
-		public void PlaySound(string name, SoundType type, SoundMode mode)
-		{
-			SoundClip selectedSound;
-			
-			switch (type)
-			{
-				case SoundType.SFX:
-					selectedSound = Array.Find(_soundSfx, SoundClip => SoundClip.Name == name);
-					SetAudioSettings(ref _audioSourceSfx, selectedSound);
-					_audioSourceSfx.Play();
-					break;
-				case SoundType.MUSIC:
-					selectedSound = Array.Find(_soundMusic, SoundClip => SoundClip.Name == name);
-					SetAudioSettings(ref _audioSourceMusic, selectedSound);
-					_audioSourceMusic.Play();
-					break;
-				case SoundType.UI:
-					selectedSound = Array.Find(_soundUi, SoundClip => SoundClip.Name == name);
-					SetAudioSettings(ref _audioSourceSfx, selectedSound);
-					_audioSourceSfx.Play();
-					break;
-				default:
-					selectedSound = null;
-					LogMessage("Sound Not Found");
-					return;
-			}	
-		}
-
-		private void SetAudioSettings(SoundClip sound, SoundType type)
-		{
-			switch (type)
-			{
-					case SoundType.SFX:
-						sound.Source = gameObject.AddComponent<AudioSource>();
-						sound.Source.outputAudioMixerGroup = _soundSfx[1];
-			}
-			
-			sound.Source = gameObject.AddComponent<AudioSource>();
-			
-			source.clip = sound.Audio;
-			source.loop = sound.Loop;
-			source.volume = sound.Volume;
-			sound.Pitch = sound.Pitch;
-			source.spatialBlend = sound.SpacialBlend;
-		}
+		private void SetAudioSettings(ref AudioSource source, SoundClip sound) 
+		{ 
+			source.clip = sound.Audio; 
+			source.loop = sound.Loop; 
+			source.volume = sound.Volume; 
+			sound.Pitch = sound.Pitch; 
+			source.spatialBlend = sound.SpacialBlend; 
+		} 
 		
 		
 		private static void LogMessage(string message)
