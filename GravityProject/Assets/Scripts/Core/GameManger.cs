@@ -10,12 +10,14 @@ namespace Core
     {
         private static readonly string GameMangerObjectName = typeof(GameManger).Name;
         private static GameManger _instance;
-
-        [SerializeField] private Transform PlayerSpawn;
+        private GUIUpdate _guiInstance;
 
         private static bool _hasPlayerStarted;
         private static bool _hasPlayerFinished;
         private static bool _hasPlayerDied;
+        
+        private float _timer = 0f;
+        private int _deaths = 0;
         
         public enum GameState
         {
@@ -65,35 +67,35 @@ namespace Core
         {
             
             // Testing
+            _guiInstance = GetComponent<GUIUpdate>();
             _currentGameState = GameState.GAME;
         }
 
         private void onGameState()
         {
-            float timer = 0f;
-            int deaths = 0;
-
             if (_hasPlayerStarted)
             {
-                timer += Time.time;
-                LogMessage("started");
-                if (_hasPlayerDied)
-                {
-                    deaths += 1;
-                    PlayerManager.PlayerController.SpawnPlayer();
-                    _hasPlayerDied = false;
-                }
+                _timer += Time.time;
             }
             else if (_hasPlayerFinished)
             {
                 // saves deaths and time
-                timer = timer;
+                _timer = _timer;
             }
             else
             {
-                timer = 0f;
+                _timer = 0f;
             }
             
+            if (_hasPlayerDied)
+            {
+                _deaths += 1;
+                PlayerManager.PlayerController.SpawnPlayer();
+                _hasPlayerDied = false;
+            }
+            
+            LogMessage(_deaths.ToString());
+            _guiInstance.UpdateUI(_timer, _deaths);
 
         }
         private static void LogMessage(string message)
