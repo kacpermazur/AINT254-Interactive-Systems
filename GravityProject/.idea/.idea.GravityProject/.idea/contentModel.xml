@@ -183,6 +183,8 @@
               <e p="SoundManger.cs" t="Include" />
             </e>
             <e p="Game" t="Include">
+              <e p="OnDeath.cs" t="Include" />
+              <e p="OnFinish.cs" t="Include" />
               <e p="OnStart.cs" t="Include" />
             </e>
             <e p="GameManger.cs" t="Include" />
