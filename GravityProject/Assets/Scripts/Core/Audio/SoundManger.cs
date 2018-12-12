@@ -91,7 +91,7 @@ namespace Core.Audio
 			source.clip = sound.Audio; 
 			source.loop = sound.Loop; 
 			source.volume = sound.Volume; 
-			sound.Pitch = sound.Pitch; 
+			//sound.Pitch = sound.Pitch; 
 			source.spatialBlend = sound.SpacialBlend; 
 		} 
 		
