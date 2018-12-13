@@ -49,6 +49,7 @@ namespace Player
 				CheckBulletDestoryed();
 				
 				CameraManger.CameraController.CameraFollow(PlayerManager.PlayerTransform.transform, CameraController.CameraPerspective.THIRDPERSON);
+				CameraManger.CameraController.FlipCamera(isGravityFlipped);
 
 			}
 		}
@@ -85,17 +86,18 @@ namespace Player
 			if (InputHandler.FlipGravity())
 			{
 				Physics.gravity *= -1;
-				PlayerManager.PlayerTransform.Rotate(180, 180, 0);
 				
 				if (!isGravityFlipped)
 				{
 					isGravityFlipped = true;
+					
 				}
 				else
 				{
 					isGravityFlipped = false;
 				}
-			}
+				
+				}
 			
 		}
 

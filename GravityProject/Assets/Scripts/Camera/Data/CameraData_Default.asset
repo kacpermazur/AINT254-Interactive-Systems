@@ -13,3 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 5
   Smoothing: 2
+  OffSetX: 0
+  OffSetY: 1.5
+  OffSetZ: -3

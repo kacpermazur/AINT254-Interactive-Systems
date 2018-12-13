@@ -36,7 +36,7 @@ namespace Camera
 			}
 		}
 
-		public void CameraFollow(Transform target , CameraPerspective type)
+		public void CameraFollow(Transform target, CameraPerspective type)
 		{
 			switch (type)
 			{
@@ -64,7 +64,6 @@ namespace Camera
 			}
 		}
 		
-
 		public void FlipCamera(bool condition)
 		{
 			float rotation = CameraManger.CameraPivotZ.localEulerAngles.z;
@@ -80,7 +79,9 @@ namespace Camera
 				rotation = Mathf.Lerp(rotation, newAngle, Time.deltaTime * _cameraData.Smoothing);
 			}
 			
-			CameraManger.CameraPivot.localEulerAngles = new Vector3(0,0, rotation);
+			CameraManger.CameraPivotZ.localEulerAngles = new Vector3(0,0, rotation);
+			LogMessage(rotation.ToString());
+
 		}
 		
 		/*
