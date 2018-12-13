@@ -79,6 +79,7 @@ namespace Player
 
 		private void GravityFlip()
 		{
+			
 			if (InputHandler.FlipGravity())
 			{
 				Physics.gravity *= -1;
@@ -86,6 +87,7 @@ namespace Player
 				
 				if (!isGravityFlipped)
 				{
+					SoundManger.instance.PlaySound("dab", SoundManger.SoundType.MUSIC);
 					isGravityFlipped = true;
 				}
 				else
@@ -103,6 +105,7 @@ namespace Player
 			
 			if (InputHandler.Shoot())
 			{
+				SoundManger.instance.PlaySound("dabb", SoundManger.SoundType.SFX);
 				if (canSpawn)
 				{
 					bullet = Instantiate(_blackHoleBullet, _shootLocation.transform.position,
@@ -140,8 +143,6 @@ namespace Player
 			Physics.Raycast(underPlayerFeet, out distanceFromPlayer);
 
 			float floorThreshold = 1.1f;
-			
-			LogMessage(distanceFromPlayer.distance.ToString());
 			
 			return distanceFromPlayer.distance < floorThreshold && distanceFromPlayer.distance != 0;
 		}

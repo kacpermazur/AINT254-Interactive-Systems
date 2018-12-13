@@ -94,7 +94,6 @@ namespace Core
                 _hasPlayerDied = false;
             }
             
-            LogMessage(_deaths.ToString());
             _guiInstance.UpdateUI(_timer, _deaths);
 
         }

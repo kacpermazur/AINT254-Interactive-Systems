@@ -53,14 +53,11 @@ namespace Player
 			{
 				case BulletState.MOVING:
 					_bullet.AddRelativeForce(Vector3.forward  * _shootForce, ForceMode.Impulse);
-					LogMessage(_currentState.ToString());
 					break;
 				case BulletState.STOP:
 					_bullet.velocity = Vector3.zero;
-					LogMessage(_currentState.ToString());
 					break;
 				case BulletState.DESTROY:
-					LogMessage(_currentState.ToString());
 					Destroy(gameObject);
 					break;
 				default:

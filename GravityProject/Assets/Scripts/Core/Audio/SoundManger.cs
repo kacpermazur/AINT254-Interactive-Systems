@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -12,6 +13,8 @@ namespace Core.Audio
 		private static readonly string SoundMangerName = typeof(SoundManger).Name;
 		public static SoundManger instance;
 
+		[SerializeField] private AudioMixer masterMixer;
+		
 		[SerializeField] private AudioSource _audioSourceMusic;
 		[SerializeField] private AudioSource _audioSourceSfx;
 		
@@ -54,8 +57,8 @@ namespace Core.Audio
 			}
 			
 			DontDestroyOnLoad(this);
-			
-			
+
+			SetAudioSources();
 		}
 
 		public void PlaySound(string name, SoundType type)
@@ -86,6 +89,11 @@ namespace Core.Audio
 			}	
 		}
 
+		public void PlaySound(string name, SoundType type, SoundMode mode)
+		{
+			
+		}
+
 		private void SetAudioSettings(ref AudioSource source, SoundClip sound) 
 		{ 
 			source.clip = sound.Audio; 
@@ -93,8 +101,16 @@ namespace Core.Audio
 			source.volume = sound.Volume; 
 			//sound.Pitch = sound.Pitch; 
 			source.spatialBlend = sound.SpacialBlend; 
-		} 
-		
+		}
+
+		private void SetAudioSources()
+		{
+			_audioSourceMusic = gameObject.AddComponent<AudioSource>();
+			_audioSourceSfx = gameObject.AddComponent<AudioSource>();
+			
+			_audioSourceMusic.outputAudioMixerGroup = masterMixer.FindMatchingGroups("Music")[0];
+			_audioSourceSfx.outputAudioMixerGroup = masterMixer.FindMatchingGroups("SFX")[0];
+		}
 		
 		private static void LogMessage(string message)
 		{
