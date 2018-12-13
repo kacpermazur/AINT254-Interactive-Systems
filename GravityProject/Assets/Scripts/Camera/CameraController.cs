@@ -15,6 +15,9 @@ namespace Camera
 		private CameraData _cameraData;
 		
 		private bool isInitialized;
+		private bool _isOffsetSet;
+
+		private Vector3 offsetAmount;
 		
 		public enum CameraPerspective 
 		{
@@ -27,19 +30,58 @@ namespace Camera
 			if (!isInitialized)
 			{
 				_cameraData = CameraManger.CameraDataConfig;
+				offsetAmount = new Vector3(_cameraData.OffSetX, _cameraData.OffSetY, _cameraData.OffSetZ);
+				LogMessage(offsetAmount.ToString());
 				isInitialized = true;
 			}
 		}
 
-		public void CameraFollow(Transform target)
+		public void CameraFollow(Transform target , CameraPerspective type)
 		{
-			Vector3 moveToTarget = Vector3.Lerp(transform.position, target.position,
-				_cameraData.FollowSpeed * Time.deltaTime);
-			
-			transform.position = moveToTarget;
+			switch (type)
+			{
+					case CameraPerspective.FIRSTPERSON:
+						if (!_isOffsetSet)
+						{
+							CameraManger.OffSet.localPosition = Vector3.zero;
+							_isOffsetSet = true;
+						}
+						
+						transform.position = target.position;
+						break;
+					case CameraPerspective.THIRDPERSON:
+						if (!_isOffsetSet)
+						{
+							CameraManger.OffSet.localPosition = offsetAmount;
+							_isOffsetSet = true;
+						}
+						
+						Vector3 moveToTarget = Vector3.Lerp(transform.position, target.position,
+						_cameraData.FollowSpeed * Time.deltaTime);
+						
+						transform.position = moveToTarget;
+						break;
+			}
 		}
+		
 
-		//public void 
+		public void FlipCamera(bool condition)
+		{
+			float rotation = CameraManger.CameraPivotZ.localEulerAngles.z;
+
+			if (condition)
+			{
+				float newAngle = 180f;
+				rotation = Mathf.Lerp(rotation, newAngle, Time.deltaTime * _cameraData.Smoothing);
+			}
+			else
+			{	
+				float newAngle = 0f;
+				rotation = Mathf.Lerp(rotation, newAngle, Time.deltaTime * _cameraData.Smoothing);
+			}
+			
+			CameraManger.CameraPivot.localEulerAngles = new Vector3(0,0, rotation);
+		}
 		
 		/*
 		void PlayerRotate()

@@ -54,8 +54,6 @@ namespace Core.Audio
 			}
 			
 			DontDestroyOnLoad(this);
-			
-			
 		}
 
 		public void PlaySound(string name, SoundType type)

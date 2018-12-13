@@ -11,10 +11,12 @@ namespace Player
 		private static readonly string PlayerMangerObjectName = typeof(PlayerManager).Name;
 		private static PlayerManager _instance;
 
+		[SerializeField] private Transform _playerHead;
 		[SerializeField] private PlayerData _playerDataConfig;
 
 		private Rigidbody _rigidbody;
 		private PlayerController _playerController;
+		
 
 		public static PlayerData PlayerDataConfig
 		{
@@ -33,6 +35,7 @@ namespace Player
 		}
 
 		public static Transform PlayerTransform{ get { return _instance.transform; }}
+		public static Transform PlayerHeadTransform{ get { return _instance._playerHead; }}
 		
 		public static Rigidbody PlayerRigidbody{ get { return _instance._rigidbody; }}
 
@@ -53,7 +56,17 @@ namespace Player
 			_rigidbody = GetComponent<Rigidbody>();
 			_playerController = GetComponent<PlayerController>();
 			
+			NullReferenceCheck();
+			
 			_playerController.Initialize();
+		}
+
+		private void NullReferenceCheck()
+		{
+			if (_playerHead == null)
+			{
+				LogMessage("Player Head Not Set Up");
+			}
 		}
 
 		private static void LogMessage(string message)

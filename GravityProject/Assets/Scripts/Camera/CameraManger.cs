@@ -11,14 +11,14 @@ namespace Camera
         private static readonly string CameraMangerName = typeof(CameraManger).Name;
         private static CameraManger _instance;
  
+        [SerializeField] private Transform _offSet;
         [SerializeField] private Transform _pivot;
         [SerializeField] private Transform _pivotZ;
-        [SerializeField] private Transform _FirstPersonTarget;
         [SerializeField] private Transform _cameraTransform;
      
         [SerializeField] private CameraData _cameraDataConfig;
 
-        public CameraController CameraController;
+        private CameraController _cameraController;
 
         public static CameraData CameraDataConfig
         {
@@ -36,10 +36,12 @@ namespace Camera
             }
         }
         
+        public static Transform OffSet{ get { return _instance._offSet; }}
         public static Transform CameraPivot{ get { return _instance._pivot; }}
         public static Transform CameraPivotZ{ get { return _instance._pivotZ; }}
-        public static Transform FirstPerson{ get { return _instance._FirstPersonTarget; }}
         public static Transform CameraTransform{ get { return _instance._cameraTransform; }}
+        
+        public static CameraController CameraController{ get { return _instance._cameraController; }}
 
         void Awake()
         {
@@ -53,7 +55,7 @@ namespace Camera
 
         public void Initialize()
         {
-            CameraController = GetComponent<CameraController>();
+            _cameraController = GetComponent<CameraController>();
             
             CameraController.Initialize();
         }

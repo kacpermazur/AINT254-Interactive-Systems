@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices.WindowsRuntime;
+using Camera;
 using Core.Audio;
 using Core.Input;
 using Physics;
@@ -46,6 +47,8 @@ namespace Player
 				GravityFlip();
 				Shoot();
 				CheckBulletDestoryed();
+				
+				CameraManger.CameraController.CameraFollow(PlayerManager.PlayerTransform.transform, CameraController.CameraPerspective.THIRDPERSON);
 
 			}
 		}
