@@ -10,15 +10,15 @@ namespace Camera
     {
         private static readonly string CameraMangerName = typeof(CameraManger).Name;
         private static CameraManger _instance;
-
-        [SerializeField] private Transform _cameraTarget;   
+ 
         [SerializeField] private Transform _pivot;
         [SerializeField] private Transform _pivotZ;
+        [SerializeField] private Transform _FirstPersonTarget;
         [SerializeField] private Transform _cameraTransform;
      
         [SerializeField] private CameraData _cameraDataConfig;
 
-        private CameraController _cameraController;
+        public CameraController CameraController;
 
         public static CameraData CameraDataConfig
         {
@@ -26,7 +26,7 @@ namespace Camera
             {
                 if (_instance._cameraDataConfig == null)
                 {
-                    LogMessage("PlayDataConfig Not Set Up");
+                    LogMessage("DataConfig Not Set Up");
                     return null;
                 }
                 else
@@ -36,9 +36,9 @@ namespace Camera
             }
         }
         
-        public static Transform GetCameraTarget{ get { return _instance._cameraTarget; }}
         public static Transform CameraPivot{ get { return _instance._pivot; }}
         public static Transform CameraPivotZ{ get { return _instance._pivotZ; }}
+        public static Transform FirstPerson{ get { return _instance._FirstPersonTarget; }}
         public static Transform CameraTransform{ get { return _instance._cameraTransform; }}
 
         void Awake()
@@ -53,13 +53,9 @@ namespace Camera
 
         public void Initialize()
         {
-            _cameraController = GetComponent<CameraController>();
+            CameraController = GetComponent<CameraController>();
             
-            LogMessage(_cameraTarget.position.ToString());
-            LogMessage(_pivot.position.ToString());
-            LogMessage(_cameraTransform.position.ToString());
-            
-            _cameraController.Initialize();
+            CameraController.Initialize();
         }
 
         private static void LogMessage(string message)

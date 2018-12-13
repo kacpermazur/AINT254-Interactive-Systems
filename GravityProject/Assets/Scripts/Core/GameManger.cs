@@ -76,7 +76,6 @@ namespace Core
             if (_hasPlayerStarted)
             {
                 timer += Time.time;
-                LogMessage("started");
                 if (_hasPlayerDied)
                 {
                     deaths += 1;
