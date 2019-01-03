@@ -21,13 +21,6 @@ namespace Player
 		public bool isGravityFlipped = false;
 		
 		private bool isInitialized;
-
-		[SerializeField] private GameObject _shootLocation;
-		[SerializeField] private GameObject _blackHoleBullet;	
-		
-		//temp
-		public GameObject bullet;
-		public bool canSpawn = false;
 		
 		public void Initialize()
 		{
@@ -45,8 +38,6 @@ namespace Player
 			{
 				Jump();
 				GravityFlip();
-				Shoot();
-				CheckBulletDestoryed();
 				
 				CameraManger.CameraController.CameraFollow(PlayerManager.PlayerTransform.transform, CameraController.CameraPerspective.THIRDPERSON);
 				CameraManger.CameraController.FlipCamera(isGravityFlipped);
@@ -99,42 +90,6 @@ namespace Player
 				
 			}
 			
-		}
-
-		private void Shoot()
-		{
-			//ToDo: Move This Out
-			
-			
-			if (InputHandler.Shoot())
-			{
-				if (canSpawn)
-				{
-					bullet = Instantiate(_blackHoleBullet, _shootLocation.transform.position,
-						transform.rotation);
-					
-					canSpawn = false;
-				}
-				
-				if (bullet.GetComponent<Bullet>().GetBulletState() == Bullet.BulletState.MOVING)
-				{
-					bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.STOP);
-				}
-				else if (bullet.GetComponent<Bullet>().GetBulletState() == Bullet.BulletState.STOP)
-				{
-					bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
-					canSpawn = true;
-				}
-				
-			}
-		}
-
-		private void CheckBulletDestoryed()
-		{
-			if (bullet == null)
-			{
-				canSpawn = true;
-			}
 		}
 		
 		private bool IsGrounded()

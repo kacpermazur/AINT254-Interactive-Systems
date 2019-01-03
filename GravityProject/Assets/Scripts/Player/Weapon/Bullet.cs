@@ -16,53 +16,37 @@ namespace Player
 		private float _checkTimer = 2f;
 		private float _minStopVelocity = 0.1f;
 		
-		public enum BulletState
+		public enum State
 		{
 			MOVING,
 			STOP,
 			DESTROY
 		}
 
-		private BulletState _currentState;
+		private State _currentState;
 
-		public BulletState GetBulletState(){ return _currentState; }
-		public void SetBulletState(BulletState state) { _currentState = state; }
+		public State GetState(){ return _currentState; }
+		public void SetState(State state) { _currentState = state; }
 
-
-		private void Start()
-		{
-			StartCoroutine(CheckVelocity());
-			
-			if (_bullet == null)
-			{
-				_bullet = GetComponent<Rigidbody>();
-			}
-
-			_currentState = BulletState.MOVING;
-			
-		}
-
-		private void Update()
-		{
-			UpdateStates();
-		}
-
-		void UpdateStates()
+		private void BulletStates()
 		{
 			switch (_currentState)
 			{
-				case BulletState.MOVING:
+				case State.MOVING:
+					gameObject.SetActive(true);
+					StartCoroutine(StopBulletAfter());
+					_bullet = GetComponent<Rigidbody>();
 					_bullet.AddRelativeForce(Vector3.forward  * _shootForce, ForceMode.Impulse);
 					LogMessage(_currentState.ToString());
 					break;
-				case BulletState.STOP:
+				case State.STOP:
 					_bullet.velocity = Vector3.zero;
 					LogMessage(_currentState.ToString());
 					break;
-				case BulletState.DESTROY:
+				case State.DESTROY:
 					LogMessage(_currentState.ToString());
-					Destroy(gameObject);
-					break;
+					gameObject.SetActive(false);
+					break;	
 				default:
 					LogMessage("States Change Error");
 					break;
@@ -70,17 +54,12 @@ namespace Player
 			}
 		}
 		
-
-		private IEnumerator CheckVelocity()
+		private IEnumerator StopBulletAfter()
 		{
 			yield return new WaitForSeconds(_checkTimer);
-			
-			if (_bullet.velocity.magnitude < _minStopVelocity)
-			{
-				_currentState = BulletState.STOP;
-			}
+
+			_currentState = State.STOP;
 		}
-		
 		
 		private static void LogMessage(string message)
 		{
