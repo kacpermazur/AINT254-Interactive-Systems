@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices.WindowsRuntime;
-using Core.Audio;
 using Core.Input;
 using Physics;
 using Player.Data;
@@ -87,7 +86,6 @@ namespace Player
 				
 				if (!isGravityFlipped)
 				{
-					SoundManger.instance.PlaySound("dab", SoundManger.SoundType.MUSIC);
 					isGravityFlipped = true;
 				}
 				else
@@ -105,7 +103,6 @@ namespace Player
 			
 			if (InputHandler.Shoot())
 			{
-				SoundManger.instance.PlaySound("dabb", SoundManger.SoundType.SFX);
 				if (canSpawn)
 				{
 					bullet = Instantiate(_blackHoleBullet, _shootLocation.transform.position,
