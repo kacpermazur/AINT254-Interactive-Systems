@@ -12,9 +12,12 @@ namespace Player
 		private static PlayerManager _instance;
 
 		[SerializeField] private PlayerData _playerDataConfig;
+		
+		[SerializeField] private Transform _shootLocation;
 
 		private Rigidbody _rigidbody;
 		private PlayerController _playerController;
+		
 
 		public static PlayerData PlayerDataConfig
 		{
@@ -33,6 +36,7 @@ namespace Player
 		}
 
 		public static Transform PlayerTransform{ get { return _instance.transform; }}
+		public static Transform BulletSpawn{ get { return _instance._shootLocation; }}
 		
 		public static Rigidbody PlayerRigidbody{ get { return _instance._rigidbody; }}
 

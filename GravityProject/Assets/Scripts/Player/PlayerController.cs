@@ -21,13 +21,13 @@ namespace Player
 		
 		private bool isInitialized;
 
-		[SerializeField] private GameObject _shootLocation;
+		
 		[SerializeField] private GameObject _blackHoleBullet;	
 		
 		//temp
 		public GameObject bullet;
 		public bool canSpawn = false;
-		
+
 		public void Initialize()
 		{
 			
@@ -42,8 +42,8 @@ namespace Player
 		{
 			if (isInitialized)
 			{
-				Jump();
-				GravityFlip();
+				//Jump();
+				//GravityFlip();
 				Shoot();
 				CheckBulletDestoryed();
 
@@ -54,7 +54,7 @@ namespace Player
 		{
 			if (isInitialized)
 			{
-				Movement();
+				//Movement();
 			}
 		}
 
@@ -73,7 +73,7 @@ namespace Player
 		{
 			if (InputHandler.Jump() && IsGrounded())
 			{
-				PlayerManager.PlayerRigidbody.AddForce(transform.up * _playerData.JumpPower * Time.deltaTime);
+				//PlayerManager.PlayerRigidbody.AddForce(transform.up * _playerData.JumpPower * Time.deltaTime);
 			}
 		}
 
@@ -105,11 +105,12 @@ namespace Player
 			
 			if (InputHandler.Shoot())
 			{
-				SoundManger.instance.PlaySound("dabb", SoundManger.SoundType.SFX);
+				//SoundManger.instance.PlaySound("dabb", SoundManger.SoundType.SFX);
 				if (canSpawn)
 				{
-					bullet = Instantiate(_blackHoleBullet, _shootLocation.transform.position,
-						transform.rotation);
+					//Quaternion test = Quaternion.Euler(PlayerManager.BulletSpawn.rotation.x, PlayerManager.BulletSpawn.rotation.y, PlayerManager.BulletSpawn.rotation.z);
+					
+					bullet = Instantiate(_blackHoleBullet, PlayerManager.BulletSpawn.position, PlayerManager.BulletSpawn.rotation);
 					
 					canSpawn = false;
 				}

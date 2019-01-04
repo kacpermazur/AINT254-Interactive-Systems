@@ -28,9 +28,12 @@ namespace Player
 		public BulletState GetBulletState(){ return _currentState; }
 		public void SetBulletState(BulletState state) { _currentState = state; }
 
+		
+		//temp
 
 		private void Start()
 		{
+			
 			StartCoroutine(CheckVelocity());
 			
 			if (_bullet == null)
@@ -49,6 +52,7 @@ namespace Player
 
 		void UpdateStates()
 		{
+			
 			switch (_currentState)
 			{
 				case BulletState.MOVING:
