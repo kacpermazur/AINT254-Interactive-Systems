@@ -15,6 +15,7 @@ namespace Physics
 		private Rigidbody _object;
 		private SphereCollider _collider;
 
+		[SerializeField] private destoryBulletCol _dest;
 		private Bullet _bullet;
 
 		private Vector3 _direction;
@@ -29,27 +30,27 @@ namespace Physics
 			_playerRigidbody = PlayerManager.PlayerRigidbody;
 
 			_bullet = GetComponent<Bullet>();
+			_dest = GetComponentInChildren<destoryBulletCol>();
 			
 			_object = GetComponent<Rigidbody>();
 			_collider = GetComponent<SphereCollider>();
-
 			
 			
 			_collider.radius = _attractRadius;
 		}
 
-		private void OnTriggerEnter(Collider other)
+		private void Update()
 		{
-			if (other.gameObject.CompareTag("Player"))
+			LogMessage(_dest.hasEntered.ToString());
+			
+			if (_dest.hasEntered && (_bullet.GetBulletState() == Bullet.BulletState.STOP))
 			{
-				if (_bullet.GetBulletState() == Bullet.BulletState.STOP)
-				{
-					float deathTimer = 0.4f;;
-					Destroy(gameObject, deathTimer);
-				}
+				float deathTimer = 0.3f;
+				;
+				Destroy(gameObject, deathTimer);
 			}
 		}
-
+		
 		private void OnTriggerStay(Collider other)
 		{
 			if (other.gameObject.CompareTag("Player"))
@@ -60,6 +61,7 @@ namespace Physics
 				}
 			}
 		}
+		
 
 		private void AttractToObject()
 		{

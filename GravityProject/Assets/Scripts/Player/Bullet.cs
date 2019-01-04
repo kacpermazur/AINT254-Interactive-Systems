@@ -9,6 +9,7 @@ namespace Player
 		private static readonly string BulletClassName = typeof(Bullet).Name;
 		
 		private Rigidbody _bullet;
+		private Collider _bulletColider;
 
 		//ToDo Move This To Scriptable Object
 		[SerializeField] private float _shootForce;
@@ -33,6 +34,7 @@ namespace Player
 
 		private void Start()
 		{
+			_bulletColider = GetComponent<SphereCollider>();
 			
 			StartCoroutine(CheckVelocity());
 			
@@ -56,9 +58,11 @@ namespace Player
 			switch (_currentState)
 			{
 				case BulletState.MOVING:
+					_bulletColider.enabled = false;
 					_bullet.AddRelativeForce(Vector3.forward  * _shootForce, ForceMode.Impulse);
 					break;
 				case BulletState.STOP:
+					_bulletColider.enabled = true;
 					_bullet.velocity = Vector3.zero;
 					break;
 				case BulletState.DESTROY:
