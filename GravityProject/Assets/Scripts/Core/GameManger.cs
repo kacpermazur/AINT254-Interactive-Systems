@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Core.Audio;
 using Core.Game;
 using Player;
 using UnityEngine;
@@ -10,7 +11,53 @@ namespace Core
     {
         private static readonly string GameMangerObjectName = typeof(GameManger).Name;
         private static GameManger _instance;
-        private GUIUpdate _guiInstance;
+
+        private PlayerManager _playerManger;
+        private SoundManger _soundManger;
+        private UIManger _uiManger;
+
+        public static PlayerManager PlayerManger => _instance._playerManger;
+        public static SoundManger SoundManger => _instance._soundManger;
+        public static UIManger UiManger => _instance._uiManger;
+
+        private void Awake()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+
+            Initialize();
+            DontDestroyOnLoad(this);
+        }
+
+        public void Initialize()
+        {
+            InitializeMangers();
+        }
+
+        private void InitializeMangers()
+        {
+            _playerManger = GetComponent<PlayerManager>();
+            _soundManger = GetComponent<SoundManger>();
+            _uiManger = GetComponent<UIManger>();
+            
+            _uiManger.Initialize();
+            _playerManger.Initialize();
+            _soundManger.Initialize();
+        }
+
+        private static void LogMessage(string message)
+        {
+            Debug.Log("<color=red>" + GameMangerObjectName + "</color> : " + message);
+        }
+    }
+}
+
+
+
+/*
+private GUIUpdate _guiInstance;
 
         private static bool _hasPlayerStarted;
         private static bool _hasPlayerFinished;
@@ -97,9 +144,6 @@ namespace Core
             _guiInstance.UpdateUI(_timer, _deaths);
 
         }
-        private static void LogMessage(string message)
-        {
-            Debug.Log("<color=red>" + GameMangerObjectName + "</color> : " + message);
-        }
-    }
-}
+
+
+*/

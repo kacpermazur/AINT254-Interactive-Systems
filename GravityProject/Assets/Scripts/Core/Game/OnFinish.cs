@@ -10,7 +10,7 @@ namespace Core.Game
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				GameManger.SetPlayerFinished = true;
+				
 			}
 
 		}

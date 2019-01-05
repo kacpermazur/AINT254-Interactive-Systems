@@ -11,7 +11,7 @@ namespace Core.Game
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				GameManger.SetPlayerDied = true;
+				
 			}
 
 		}

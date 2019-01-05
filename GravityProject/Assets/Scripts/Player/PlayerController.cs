@@ -14,14 +14,9 @@ namespace Player
 		private static readonly string PlayerControllerObjectName = typeof(PlayerController).Name;
 		
 		private PlayerData _playerData;
-
-		[SerializeField] private Transform playerSpawn;
-
-		public bool isGravityFlipped = false;
 		
 		private bool isInitialized;
 
-		
 		[SerializeField] private GameObject _blackHoleBullet;	
 		
 		//temp
@@ -42,62 +37,12 @@ namespace Player
 		{
 			if (isInitialized)
 			{
-				//Jump();
-				//GravityFlip();
 				Shoot();
 				CheckBulletDestoryed();
 
 			}
 		}
 		
-		void FixedUpdate()
-		{
-			if (isInitialized)
-			{
-				//Movement();
-			}
-		}
-
-		public void SpawnPlayer()
-		{
-			transform.position = playerSpawn.position;
-		}
-		
-		private void Movement()
-		{
-			transform.Translate(0, 0, InputHandler.Vertical() * _playerData.MoveSpeed * Time.deltaTime);
-			transform.Rotate(0, InputHandler.Horizontal() * _playerData.RotateSpeed * Time.deltaTime, 0);	
-		}
-
-		private void Jump()
-		{
-			if (InputHandler.Jump() && IsGrounded())
-			{
-				//PlayerManager.PlayerRigidbody.AddForce(transform.up * _playerData.JumpPower * Time.deltaTime);
-			}
-		}
-
-		private void GravityFlip()
-		{
-			
-			if (InputHandler.FlipGravity())
-			{
-				Physics.gravity *= -1;
-				PlayerManager.PlayerTransform.Rotate(180, 180, 0);
-				
-				if (!isGravityFlipped)
-				{
-					SoundManger.instance.PlaySound("dab", SoundManger.SoundType.MUSIC);
-					isGravityFlipped = true;
-				}
-				else
-				{
-					isGravityFlipped = false;
-				}
-			}
-			
-		}
-
 		private void Shoot()
 		{
 			//ToDo: Move This Out
@@ -108,8 +53,6 @@ namespace Player
 				//SoundManger.instance.PlaySound("dabb", SoundManger.SoundType.SFX);
 				if (canSpawn)
 				{
-					//Quaternion test = Quaternion.Euler(PlayerManager.BulletSpawn.rotation.x, PlayerManager.BulletSpawn.rotation.y, PlayerManager.BulletSpawn.rotation.z);
-					
 					bullet = Instantiate(_blackHoleBullet, PlayerManager.BulletSpawn.position, PlayerManager.BulletSpawn.rotation);
 					
 					canSpawn = false;
@@ -124,7 +67,6 @@ namespace Player
 					bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
 					canSpawn = true;
 				}
-				
 			}
 		}
 
@@ -136,18 +78,6 @@ namespace Player
 			}
 		}
 		
-		private bool IsGrounded()
-		{
-			RaycastHit distanceFromPlayer;
-			Ray underPlayerFeet = new Ray(transform.position, -transform.up);
-
-			Physics.Raycast(underPlayerFeet, out distanceFromPlayer);
-
-			float floorThreshold = 1.1f;
-			
-			return distanceFromPlayer.distance < floorThreshold && distanceFromPlayer.distance != 0;
-		}
-			
 		private static void LogMessage(string message)
 		{
 			Debug.Log("<color=green>" + PlayerControllerObjectName + "</color> : " + message);

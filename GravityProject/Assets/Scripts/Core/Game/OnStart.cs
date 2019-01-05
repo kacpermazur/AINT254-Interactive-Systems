@@ -10,7 +10,7 @@ namespace Core.Game
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				GameManger.SetPlayerStarted = false;
+				
 			}
 			
 		}
@@ -19,7 +19,7 @@ namespace Core.Game
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				GameManger.SetPlayerStarted = true;
+				
 			}
 		}
 	}

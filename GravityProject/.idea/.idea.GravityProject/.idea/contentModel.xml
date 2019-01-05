@@ -172,13 +172,6 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Camera" t="Include">
-            <e p="CameraController.cs" t="Include" />
-            <e p="CameraManger.cs" t="Include" />
-            <e p="Data" t="Include">
-              <e p="CameraData.cs" t="Include" />
-            </e>
-          </e>
           <e p="Core" t="Include">
             <e p="Audio" t="Include">
               <e p="SoundClip.cs" t="Include" />
@@ -188,6 +181,10 @@
               <e p="OnDeath.cs" t="Include" />
               <e p="OnFinish.cs" t="Include" />
               <e p="OnStart.cs" t="Include" />
+              <e p="UIManger.cs" t="Include" />
+              <e p="UIPanel.cs" t="Include" />
+              <e p="UIPanelMainMenu.cs" t="Include" />
+              <e p="UIPanelVictory.cs" t="Include" />
             </e>
             <e p="GameManger.cs" t="Include" />
             <e p="GUIUpdate.cs" t="Include" />

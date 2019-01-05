@@ -18,13 +18,10 @@ namespace Core.Audio
 		[SerializeField] private AudioSource _audioSourceMusic;
 		[SerializeField] private AudioSource _audioSourceSfx;
 		
-		//testing
-		public enum GameMode
-		{
-			STARTMENU,
-			INGAME,
-			PAUSE,
-		}
+		[SerializeField] private SoundClip[] _soundSfx;
+		[SerializeField] private SoundClip[] _soundMusic;
+		[SerializeField] private SoundClip[] _soundUi;
+		
 		public enum SoundType
 		{
 			SFX,
@@ -39,25 +36,10 @@ namespace Core.Audio
 			STATIC,
 			DYANMIC
 		}
-
-		[SerializeField] private SoundClip[] _soundSfx;
-		[SerializeField] private SoundClip[] _soundMusic;
-		[SerializeField] private SoundClip[] _soundUi;
 		
-		private void Awake()
-		{
-			Initialize();
-		}
-
 		public void Initialize()
 		{
-			if (instance == null)
-			{
-				instance = this;
-			}
-			
 			DontDestroyOnLoad(this);
-
 			SetAudioSources();
 		}
 

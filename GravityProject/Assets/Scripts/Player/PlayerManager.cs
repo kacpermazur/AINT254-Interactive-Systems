@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Core;
 using UnityEngine;
 using Player.Data;
 
@@ -12,7 +13,6 @@ namespace Player
 		private static PlayerManager _instance;
 
 		[SerializeField] private PlayerData _playerDataConfig;
-		
 		[SerializeField] private Transform _shootLocation;
 
 		private Rigidbody _rigidbody;
@@ -35,22 +35,13 @@ namespace Player
 			}
 		}
 
+		
 		public static Transform PlayerTransform{ get { return _instance.transform; }}
 		public static Transform BulletSpawn{ get { return _instance._shootLocation; }}
 		
 		public static Rigidbody PlayerRigidbody{ get { return _instance._rigidbody; }}
 
 		public static PlayerController PlayerController{ get { return _instance._playerController; }}
-
-		void Awake()
-		{
-			if (_instance == null)
-			{
-				_instance = this;
-			}
-			
-			Initialize();
-		}
 
 		public void Initialize()
 		{
@@ -59,7 +50,7 @@ namespace Player
 			
 			_playerController.Initialize();
 		}
-
+		
 		private static void LogMessage(string message)
 		{
 			Debug.Log("<color=red>" + PlayerMangerObjectName + "</color> : " + message);
