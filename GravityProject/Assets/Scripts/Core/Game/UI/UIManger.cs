@@ -9,6 +9,7 @@ public class UIManger : MonoBehaviour, IInitializable
     [SerializeField] private UIPanelMainMenu _mainMenu;
     [SerializeField] private UIPanelVictory _victoryPanel;
     [SerializeField] private UIPanelInGame _inGamePanel;
+    [SerializeField] private UIPanelPaused _pausedPanel;
 
     private List<UIPanel> _uiPanels = new List<UIPanel>();
     
@@ -19,9 +20,11 @@ public class UIManger : MonoBehaviour, IInitializable
         _uiPanels.Add(_mainMenu);
         _uiPanels.Add(_victoryPanel);
         _uiPanels.Add(_inGamePanel);
+        _uiPanels.Add(_pausedPanel);
         
         _victoryPanel.Initialize();
         _mainMenu.Initialize();
+        _pausedPanel.Initialize();
     }
 
     private void OnDestroy()
@@ -36,6 +39,9 @@ public class UIManger : MonoBehaviour, IInitializable
         
         _mainMenu.onBtnStartClicked += OnBtnStartClicked;
         _mainMenu.onBtnExitClicked += OnBtnExitClicked;
+
+        _pausedPanel.okButtonClicked += OnBtnStartClicked;
+        _pausedPanel.mainMenuButtonClicked += OnBtnMainMenuClicked;
     }
 
     private void RemoveListeners()
@@ -45,6 +51,9 @@ public class UIManger : MonoBehaviour, IInitializable
         
         _mainMenu.onBtnStartClicked -= OnBtnStartClicked;
         _mainMenu.onBtnExitClicked -= OnBtnExitClicked;
+        
+        _pausedPanel.okButtonClicked -= OnBtnStartClicked;
+        _pausedPanel.mainMenuButtonClicked -= OnBtnMainMenuClicked;
     }
     
     private void OnBtnStartClicked()

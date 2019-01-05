@@ -13,11 +13,11 @@ namespace Core
         private static GameManger _instance;
 
         [SerializeField] private PlayerManager _playerManger;
-      //  [SerializeField] private SoundManger _soundManger;
+        // [SerializeField] private SoundManger _soundManger;
         [SerializeField] private UIManger _uiManger;
 
         public PlayerManager PlayerManger => _playerManger;
-       // public static SoundManger SoundManger => _instance._soundManger;
+        // public static SoundManger SoundManger => _instance._soundManger;
         public UIManger UiManger => _uiManger;
 
         private void Awake()
@@ -41,7 +41,6 @@ namespace Core
    
             _playerManger.Initialize();
            _uiManger.Initialize();
-           
            // _soundManger.Initialize();
         }
 
