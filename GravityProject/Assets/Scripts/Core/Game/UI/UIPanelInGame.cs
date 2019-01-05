@@ -1,16 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class UIPanelInGame : MonoBehaviour {
+public class UIPanelInGame : UIPanel
+{
+	[SerializeField] private Text _timeText;
+	[SerializeField] private Text _deathText;
 
-	// Use this for initialization
-	void Start () {
-		
+	public void changeTimeText(float time)
+	{
+		_timeText.text = "Time : " + FormatTime(time);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	public void changeDeathText(int count)
+	{
+		_timeText.text = "Time : " + count;
+	}
+	
+	private string FormatTime(float time)
+	{
+		int d = (int)(time * 100.0f);
+            
+		int minutes = d / (60 * 100);
+		int seconds = (d % (60 * 100)) / 100;
+            
+		return String.Format("{0:00}:{1:00}", minutes, seconds);
 	}
 }

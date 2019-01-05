@@ -43,7 +43,7 @@ namespace Core.Game
             _playerTime.text = ("Your Time Was: " + FormatTime(time));
         }
         
-        string FormatTime(float time)
+        private string FormatTime(float time)
         {
             int d = (int)(time * 100.0f);
             

@@ -186,6 +186,7 @@
                 <e p="UIPanel.cs" t="Include" />
                 <e p="UIPanelInGame.cs" t="Include" />
                 <e p="UIPanelMainMenu.cs" t="Include" />
+                <e p="UIPanelPaused.cs" t="Include" />
                 <e p="UIPanelVictory.cs" t="Include" />
               </e>
             </e>

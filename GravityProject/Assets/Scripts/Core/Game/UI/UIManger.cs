@@ -8,6 +8,7 @@ public class UIManger : MonoBehaviour, IInitializable
 
     [SerializeField] private UIPanelMainMenu _mainMenu;
     [SerializeField] private UIPanelVictory _victoryPanel;
+    [SerializeField] private UIPanelInGame _inGamePanel;
 
     private List<UIPanel> _uiPanels = new List<UIPanel>();
     
@@ -17,6 +18,7 @@ public class UIManger : MonoBehaviour, IInitializable
         
         _uiPanels.Add(_mainMenu);
         _uiPanels.Add(_victoryPanel);
+        _uiPanels.Add(_inGamePanel);
         
         _victoryPanel.Initialize();
         _mainMenu.Initialize();
@@ -47,7 +49,7 @@ public class UIManger : MonoBehaviour, IInitializable
     
     private void OnBtnStartClicked()
     {
-        
+        OpenPanel(_inGamePanel);
     }
     
     private void OnBtnExitClicked()
