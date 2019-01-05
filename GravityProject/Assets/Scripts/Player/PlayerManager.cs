@@ -45,6 +45,7 @@ namespace Player
 
 		public void Initialize()
 		{
+			_instance = this;
 			_rigidbody = GetComponent<Rigidbody>();
 			_playerController = GetComponent<PlayerController>();
 			

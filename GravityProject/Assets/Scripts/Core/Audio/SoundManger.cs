@@ -11,7 +11,6 @@ namespace Core.Audio
 	public class SoundManger : MonoBehaviour, IInitializable
 	{
 		private static readonly string SoundMangerName = typeof(SoundManger).Name;
-		public static SoundManger instance;
 
 		[SerializeField] private AudioMixer masterMixer;
 		

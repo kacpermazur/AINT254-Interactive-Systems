@@ -27,5 +27,6 @@ namespace Core.Game
         {
             onBtnExitClicked?.Invoke();
         }
+        
     }
 }

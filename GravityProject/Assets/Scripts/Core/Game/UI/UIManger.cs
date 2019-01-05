@@ -9,14 +9,14 @@ public class UIManger : MonoBehaviour, IInitializable
     [SerializeField] private UIPanelMainMenu _mainMenu;
     [SerializeField] private UIPanelVictory _victoryPanel;
 
-    private List<UIPanel> _UiPanels;
+    private List<UIPanel> _uiPanels = new List<UIPanel>();
     
     public void Initialize()
     {
         AddListeners();
         
-        _UiPanels.Add(_mainMenu);
-        _UiPanels.Add(_victoryPanel);
+        _uiPanels.Add(_mainMenu);
+        _uiPanels.Add(_victoryPanel);
         
         _victoryPanel.Initialize();
         _mainMenu.Initialize();
@@ -52,7 +52,7 @@ public class UIManger : MonoBehaviour, IInitializable
     
     private void OnBtnExitClicked()
     {
-        
+        Application.Quit();
     }
     
     private void OnBtnNextStageClicked()
@@ -62,17 +62,19 @@ public class UIManger : MonoBehaviour, IInitializable
 
     private void OnBtnMainMenuClicked()
     {
+        Debug.Log("MainMenu Panel load");
         OpenPanel(_mainMenu);
     }
 
     private void OpenPanel(UIPanel uiPanel)
     {
-        foreach (UIPanel panel in _UiPanels)
+        foreach (UIPanel panel in _uiPanels)
         {
             panel.Close();
         }
         
         uiPanel.Open();
     }
+    
     
 }

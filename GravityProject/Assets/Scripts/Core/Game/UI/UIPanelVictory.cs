@@ -29,7 +29,28 @@ namespace Core.Game
 
         private void BtnMainMenu()
         {
+            Debug.Log("Invoked");
             onBtnMainMenuClicked?.Invoke();
+        }
+
+        public void TextBestTime(float time)
+        {
+            _bestTime.text = ("Best Time Was: " + FormatTime(time));
+        }
+
+        public void TextPlayerTime(float time)
+        {
+            _playerTime.text = ("Your Time Was: " + FormatTime(time));
+        }
+        
+        string FormatTime(float time)
+        {
+            int d = (int)(time * 100.0f);
+            
+            int minutes = d / (60 * 100);
+            int seconds = (d % (60 * 100)) / 100;
+            
+            return String.Format("{0:00}:{1:00}", minutes, seconds);
         }
     }
 }

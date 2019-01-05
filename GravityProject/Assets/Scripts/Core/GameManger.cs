@@ -12,13 +12,13 @@ namespace Core
         private static readonly string GameMangerObjectName = typeof(GameManger).Name;
         private static GameManger _instance;
 
-        private PlayerManager _playerManger;
-        private SoundManger _soundManger;
-        private UIManger _uiManger;
+        [SerializeField] private PlayerManager _playerManger;
+      //  [SerializeField] private SoundManger _soundManger;
+        [SerializeField] private UIManger _uiManger;
 
-        public static PlayerManager PlayerManger => _instance._playerManger;
-        public static SoundManger SoundManger => _instance._soundManger;
-        public static UIManger UiManger => _instance._uiManger;
+        public PlayerManager PlayerManger => _playerManger;
+       // public static SoundManger SoundManger => _instance._soundManger;
+        public UIManger UiManger => _uiManger;
 
         private void Awake()
         {
@@ -38,13 +38,11 @@ namespace Core
 
         private void InitializeMangers()
         {
-            _playerManger = GetComponent<PlayerManager>();
-            _soundManger = GetComponent<SoundManger>();
-            _uiManger = GetComponent<UIManger>();
-            
-            _uiManger.Initialize();
+   
             _playerManger.Initialize();
-            _soundManger.Initialize();
+           _uiManger.Initialize();
+           
+           // _soundManger.Initialize();
         }
 
         private static void LogMessage(string message)
