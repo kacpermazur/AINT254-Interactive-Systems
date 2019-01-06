@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Core.Game
+namespace UI.Panel
 {
     public class UIPanelMainMenu : UIPanel
     {

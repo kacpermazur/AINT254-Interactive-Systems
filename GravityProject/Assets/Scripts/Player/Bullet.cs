@@ -29,9 +29,6 @@ namespace Player
 		public BulletState GetBulletState(){ return _currentState; }
 		public void SetBulletState(BulletState state) { _currentState = state; }
 
-		
-		//temp
-
 		private void Start()
 		{
 			_bulletColider = GetComponent<SphereCollider>();

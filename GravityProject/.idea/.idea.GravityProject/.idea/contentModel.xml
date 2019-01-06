@@ -181,20 +181,20 @@
               <e p="OnDeath.cs" t="Include" />
               <e p="OnFinish.cs" t="Include" />
               <e p="OnStart.cs" t="Include" />
-              <e p="UI" t="Include">
-                <e p="UIManger.cs" t="Include" />
-                <e p="UIPanel.cs" t="Include" />
-                <e p="UIPanelInGame.cs" t="Include" />
-                <e p="UIPanelMainMenu.cs" t="Include" />
-                <e p="UIPanelPaused.cs" t="Include" />
-                <e p="UIPanelVictory.cs" t="Include" />
-              </e>
             </e>
             <e p="GameManger.cs" t="Include" />
             <e p="GUIUpdate.cs" t="Include" />
             <e p="Initializable.cs" t="Include" />
             <e p="Input" t="Include">
               <e p="InputHandler.cs" t="Include" />
+            </e>
+            <e p="UI" t="Include">
+              <e p="UIManger.cs" t="Include" />
+              <e p="UIPanel.cs" t="Include" />
+              <e p="UIPanelInGame.cs" t="Include" />
+              <e p="UIPanelMainMenu.cs" t="Include" />
+              <e p="UIPanelPaused.cs" t="Include" />
+              <e p="UIPanelVictory.cs" t="Include" />
             </e>
           </e>
           <e p="Physics" t="Include">
