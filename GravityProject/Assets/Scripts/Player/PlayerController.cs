@@ -1,9 +1,6 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
-using Core.Audio;
+﻿using Core;
 using Core.Input;
-using Physics;
 using Player.Data;
-using UnityEditor;
 
 namespace Player
 {
@@ -39,15 +36,20 @@ namespace Player
 			{
 				Shoot();
 				CheckBulletDestoryed();
+				PauseMenu();
+			}
+		}
 
+		private void PauseMenu()
+		{
+			if (InputHandler.Escape())
+			{
+				GameManger.instance.SetGameState(GameManger.GameState.PAUSED);
 			}
 		}
 		
 		private void Shoot()
 		{
-			//ToDo: Move This Out
-			
-			
 			if (InputHandler.Shoot())
 			{
 				//SoundManger.instance.PlaySound("dabb", SoundManger.SoundType.SFX);

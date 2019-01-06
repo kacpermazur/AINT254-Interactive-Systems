@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Core.Audio;
-using Core.Game;
-using Player;
+﻿using Player;
+using Player.Data;
 using UnityEngine;
 
 namespace Core
@@ -12,6 +9,8 @@ namespace Core
         private static readonly string GameMangerObjectName = typeof(GameManger).Name;
         private static GameManger _instance;
 
+        public static GameManger instance { get { return _instance; } }
+
         [SerializeField] private PlayerManager _playerManger;
         // [SerializeField] private SoundManger _soundManger;
         [SerializeField] private UIManger _uiManger;
@@ -19,6 +18,19 @@ namespace Core
         public PlayerManager PlayerManger => _playerManger;
         // public static SoundManger SoundManger => _instance._soundManger;
         public UIManger UiManger => _uiManger;
+
+        public enum GameState
+        {
+            START,
+            INGAME,
+            PAUSED,
+            COMPLETELEVEL,
+            NONE
+        }
+        private GameState _gameState;
+
+        public void SetGameState(GameState state) { _gameState = state; }
+        public GameState GetGameState() { return _gameState; }
 
         private void Awake()
         {
@@ -31,17 +43,60 @@ namespace Core
             DontDestroyOnLoad(this);
         }
 
+        private void Update()
+        {
+            
+            CheckState();
+        }
+
         public void Initialize()
         {
             InitializeMangers();
+            _gameState = GameState.START;
         }
 
         private void InitializeMangers()
         {
-   
-            _playerManger.Initialize();
+           _playerManger.Initialize();
            _uiManger.Initialize();
            // _soundManger.Initialize();
+        }
+
+        private void CheckState()
+        {
+            switch (_gameState)
+            {
+                    case GameState.START:
+                        Time.timeScale = 0;
+                        _uiManger.OpenPanel(_uiManger.MainMenu);
+                        //_playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
+                        _gameState = GameState.NONE;
+                        break;
+                    case GameState.INGAME:
+                        Time.timeScale = 1;
+                        _uiManger.OpenPanel(_uiManger.InGamePanel);
+                        //_playerManger.FirstPersonController.mouseLook.SetCursorLock(true);
+                        _gameState = GameState.NONE;
+                        break;
+                    case GameState.PAUSED:
+                        Time.timeScale = 0;
+                        _uiManger.OpenPanel(_uiManger.PausedPanel);
+                        _gameState = GameState.NONE;
+                        //_playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
+                        break;
+                    case GameState.COMPLETELEVEL:
+                        Time.timeScale = 0;
+                        _uiManger.OpenPanel(_uiManger.VictoryPanel);
+                        //_playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
+                        _gameState = GameState.NONE;
+                        break;
+                    case GameState.NONE:
+                        break;
+                    default:
+                        LogMessage("game state not set!");
+                        break;
+                        
+            }
         }
 
         private static void LogMessage(string message)

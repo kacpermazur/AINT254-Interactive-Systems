@@ -13,26 +13,24 @@ public abstract class UIPanel : MonoBehaviour , IInitializable
 
     public virtual void Initialize()
     {
-        
+        _state = UIState.NONE;
     }
 
     public virtual void Open()
     {
-        gameObject.SetActive(true);
-        
-        if (_state == UIState.CLOSE)
+        if (_state == UIState.CLOSE || _state == UIState.NONE)
         {
             _state = UIState.OPEN;
+            gameObject.SetActive(true);
         }
     }
     
     public virtual void Close()
-    {
-        gameObject.SetActive(false);
-        
-        if (_state == UIState.OPEN)
+    { 
+        if (_state == UIState.OPEN || _state == UIState.NONE)
         {
             _state = UIState.CLOSE;
+            gameObject.SetActive(false);
         }
     }
 }

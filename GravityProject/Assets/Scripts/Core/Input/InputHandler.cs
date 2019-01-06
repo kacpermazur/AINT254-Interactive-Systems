@@ -4,29 +4,15 @@
     
     public struct InputHandler
     {
-        public static float Vertical()
+        public static bool Escape()
         {
-            return Input.GetAxis("Vertical");
+            return Input.GetKeyDown(KeyCode.Escape);
         }
         
-        public static float Horizontal()
-        {
-            return Input.GetAxis("Horizontal");
-        }
-
-        public static bool Jump()
-        {
-            return Input.GetKeyDown(KeyCode.Space);
-        }
-
-        public static bool FlipGravity()
-        {
-            return Input.GetKeyDown(KeyCode.E);
-        }
-
         public static bool Shoot()
         {
             return Input.GetKeyDown(KeyCode.Mouse0);
         }
+        
     }
 }

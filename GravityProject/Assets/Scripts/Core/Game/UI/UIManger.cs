@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Core;
 using Core.Game;
 using UnityEngine;
 
 public class UIManger : MonoBehaviour, IInitializable
 {
-
+    
     [SerializeField] private UIPanelMainMenu _mainMenu;
     [SerializeField] private UIPanelVictory _victoryPanel;
     [SerializeField] private UIPanelInGame _inGamePanel;
     [SerializeField] private UIPanelPaused _pausedPanel;
+    
+    public UIPanelMainMenu MainMenu { get { return _mainMenu; } }
+    public UIPanelVictory VictoryPanel { get { return _victoryPanel; } }
+    public UIPanelInGame InGamePanel { get { return _inGamePanel; } }
+    public UIPanelPaused PausedPanel{ get { return _pausedPanel; } }
 
     private List<UIPanel> _uiPanels = new List<UIPanel>();
-    
+
     public void Initialize()
     {
         AddListeners();
@@ -59,6 +65,7 @@ public class UIManger : MonoBehaviour, IInitializable
     private void OnBtnStartClicked()
     {
         OpenPanel(_inGamePanel);
+        GameManger.instance.SetGameState(GameManger.GameState.INGAME);
     }
     
     private void OnBtnExitClicked()
@@ -68,16 +75,16 @@ public class UIManger : MonoBehaviour, IInitializable
     
     private void OnBtnNextStageClicked()
     {
-        
+        //
     }
 
     private void OnBtnMainMenuClicked()
     {
-        Debug.Log("MainMenu Panel load");
         OpenPanel(_mainMenu);
+        GameManger.instance.SetGameState(GameManger.GameState.START);
     }
 
-    private void OpenPanel(UIPanel uiPanel)
+    public void OpenPanel(UIPanel uiPanel)
     {
         foreach (UIPanel panel in _uiPanels)
         {

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Core;
-using UnityEngine;
+﻿using UnityEngine;
 using Player.Data;
+using UnityStandardAssets.Characters.FirstPerson;
 
 namespace Player
 {
@@ -17,7 +15,7 @@ namespace Player
 
 		private Rigidbody _rigidbody;
 		private PlayerController _playerController;
-		
+		private RigidbodyFirstPersonController _controller;
 
 		public static PlayerData PlayerDataConfig
 		{
@@ -41,13 +39,15 @@ namespace Player
 		
 		public static Rigidbody PlayerRigidbody{ get { return _instance._rigidbody; }}
 
-		public static PlayerController PlayerController{ get { return _instance._playerController; }}
+		public static PlayerController PlayerController{ get { return _instance._playerController; } }
+		public RigidbodyFirstPersonController FirstPersonController{ get { return _instance._controller; } }
 
 		public void Initialize()
 		{
 			_instance = this;
 			_rigidbody = GetComponent<Rigidbody>();
 			_playerController = GetComponent<PlayerController>();
+			_controller = GetComponent<RigidbodyFirstPersonController>();
 			
 			_playerController.Initialize();
 		}

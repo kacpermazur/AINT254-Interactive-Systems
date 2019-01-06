@@ -71,7 +71,6 @@ namespace Player
 				default:
 					LogMessage("States Change Error");
 					break;
-					
 			}
 		}
 		
