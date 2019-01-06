@@ -16,9 +16,9 @@ namespace Player
 
 		[SerializeField] private GameObject _blackHoleBullet;	
 		
-		//temp
-		public GameObject bullet;
-		public bool canSpawn = false;
+		private GameObject bullet;
+		private bool canSpawn = false;
+		private bool canShoot = false;
 
 		public void Initialize()
 		{
@@ -30,7 +30,7 @@ namespace Player
 			}
 		}
 
-		void Update()
+		private void Update()
 		{
 			if (isInitialized)
 			{
@@ -50,12 +50,12 @@ namespace Player
 		
 		private void Shoot()
 		{
-			if (InputHandler.Shoot())
+			if (InputHandler.Shoot() && canShoot)
 			{
 				//SoundManger.instance.PlaySound("dabb", SoundManger.SoundType.SFX);
 				if (canSpawn)
 				{
-					bullet = Instantiate(_blackHoleBullet, PlayerManager.BulletSpawn.position, PlayerManager.BulletSpawn.rotation);
+					bullet = Instantiate(_blackHoleBullet, PlayerManager.instance.BulletSpawn.position, PlayerManager.instance.BulletSpawn.rotation);
 					
 					canSpawn = false;
 				}
@@ -78,6 +78,11 @@ namespace Player
 			{
 				canSpawn = true;
 			}
+		}
+
+		public void CanShoot(bool condition)
+		{
+			canShoot = condition;
 		}
 		
 		private static void LogMessage(string message)

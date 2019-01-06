@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core;
 using Core.Game;
+using Player;
 using UnityEngine;
 
 public class UIManger : MonoBehaviour, IInitializable
@@ -66,6 +67,7 @@ public class UIManger : MonoBehaviour, IInitializable
     {
         OpenPanel(_inGamePanel);
         GameManger.instance.SetGameState(GameManger.GameState.INGAME);
+        PlayerManager.instance.PlayerController.CanShoot(true);
     }
     
     private void OnBtnExitClicked()

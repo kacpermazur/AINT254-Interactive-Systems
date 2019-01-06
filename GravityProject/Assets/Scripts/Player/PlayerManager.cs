@@ -32,15 +32,16 @@ namespace Player
 				}
 			}
 		}
-
 		
-		public static Transform PlayerTransform{ get { return _instance.transform; }}
-		public static Transform BulletSpawn{ get { return _instance._shootLocation; }}
+		public static PlayerManager instance { get { return _instance; } }
 		
-		public static Rigidbody PlayerRigidbody{ get { return _instance._rigidbody; }}
-
-		public static PlayerController PlayerController{ get { return _instance._playerController; } }
-		public RigidbodyFirstPersonController FirstPersonController{ get { return _instance._controller; } }
+		public Transform PlayerTransform{ get { return transform; }}
+		public Transform BulletSpawn{ get { return _shootLocation; }}
+		
+		public Rigidbody PlayerRigidbody{ get { return _rigidbody; }}
+		
+		public PlayerController PlayerController { get { return _playerController; } }
+		public RigidbodyFirstPersonController FirstPersonController { get { return _controller; } }
 
 		public void Initialize()
 		{

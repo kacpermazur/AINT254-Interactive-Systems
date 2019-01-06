@@ -69,25 +69,26 @@ namespace Core
                     case GameState.START:
                         Time.timeScale = 0;
                         _uiManger.OpenPanel(_uiManger.MainMenu);
-                        //_playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
+                        _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
                         _gameState = GameState.NONE;
                         break;
                     case GameState.INGAME:
                         Time.timeScale = 1;
                         _uiManger.OpenPanel(_uiManger.InGamePanel);
-                        //_playerManger.FirstPersonController.mouseLook.SetCursorLock(true);
+                        _playerManger.FirstPersonController.mouseLook.SetCursorLock(true);
                         _gameState = GameState.NONE;
                         break;
                     case GameState.PAUSED:
                         Time.timeScale = 0;
                         _uiManger.OpenPanel(_uiManger.PausedPanel);
+                        _playerManger.PlayerController.CanShoot(false);
+                        _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
                         _gameState = GameState.NONE;
-                        //_playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
                         break;
                     case GameState.COMPLETELEVEL:
                         Time.timeScale = 0;
                         _uiManger.OpenPanel(_uiManger.VictoryPanel);
-                        //_playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
+                        _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
                         _gameState = GameState.NONE;
                         break;
                     case GameState.NONE:

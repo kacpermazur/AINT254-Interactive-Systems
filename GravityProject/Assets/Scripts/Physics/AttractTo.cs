@@ -26,8 +26,8 @@ namespace Physics
 
 		private void Start()
 		{
-			_playerTransform = PlayerManager.PlayerTransform;
-			_playerRigidbody = PlayerManager.PlayerRigidbody;
+			_playerTransform = PlayerManager.instance.PlayerTransform;
+			_playerRigidbody = PlayerManager.instance.PlayerRigidbody;
 
 			_bullet = GetComponent<Bullet>();
 			_dest = GetComponentInChildren<destoryBulletCol>();
