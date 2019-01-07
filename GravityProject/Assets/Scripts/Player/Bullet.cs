@@ -51,7 +51,6 @@ namespace Player
 
 		void UpdateStates()
 		{
-			
 			switch (_currentState)
 			{
 				case BulletState.MOVING:
@@ -71,7 +70,6 @@ namespace Player
 			}
 		}
 		
-
 		private IEnumerator CheckVelocity()
 		{
 			yield return new WaitForSeconds(_checkTimer);
@@ -81,7 +79,6 @@ namespace Player
 				_currentState = BulletState.STOP;
 			}
 		}
-		
 		
 		private static void LogMessage(string message)
 		{

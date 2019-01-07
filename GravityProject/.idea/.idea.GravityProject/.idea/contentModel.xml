@@ -183,10 +183,12 @@
               <e p="OnStart.cs" t="Include" />
             </e>
             <e p="GameManger.cs" t="Include" />
-            <e p="GUIUpdate.cs" t="Include" />
             <e p="Initializable.cs" t="Include" />
             <e p="Input" t="Include">
               <e p="InputHandler.cs" t="Include" />
+            </e>
+            <e p="Pooling" t="Include">
+              <e p="PoolManger.cs" t="Include" />
             </e>
             <e p="UI" t="Include">
               <e p="UIManger.cs" t="Include" />

@@ -1,5 +1,5 @@
 ﻿using Player;
-using Player.Data;
+using UI;
 using UnityEngine;
 
 namespace Core
@@ -96,7 +96,6 @@ namespace Core
                     default:
                         LogMessage("game state not set!");
                         break;
-                        
             }
         }
 
