@@ -29,7 +29,6 @@ namespace UI.Panel
 
         private void BtnMainMenu()
         {
-            Debug.Log("Invoked");
             onBtnMainMenuClicked?.Invoke();
         }
 

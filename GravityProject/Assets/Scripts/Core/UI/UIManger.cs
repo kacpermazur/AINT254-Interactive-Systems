@@ -15,25 +15,10 @@ namespace UI
         [SerializeField] private UIPanelInGame _inGamePanel;
         [SerializeField] private UIPanelPaused _pausedPanel;
 
-        public UIPanelMainMenu MainMenu
-        {
-            get { return _mainMenu; }
-        }
-
-        public UIPanelVictory VictoryPanel
-        {
-            get { return _victoryPanel; }
-        }
-
-        public UIPanelInGame InGamePanel
-        {
-            get { return _inGamePanel; }
-        }
-
-        public UIPanelPaused PausedPanel
-        {
-            get { return _pausedPanel; }
-        }
+        public UIPanelMainMenu MainMenuPanel => _mainMenu;
+        public UIPanelVictory VictoryPanel => _victoryPanel;
+        public UIPanelInGame InGamePanel => _inGamePanel;
+        public UIPanelPaused PausedPanel => _pausedPanel;
 
         private List<UIPanel> _uiPanels = new List<UIPanel>();
 

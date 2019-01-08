@@ -68,7 +68,7 @@ namespace Core
             {
                     case GameState.START:
                         Time.timeScale = 0;
-                        _uiManger.OpenPanel(_uiManger.MainMenu);
+                        _uiManger.OpenPanel(_uiManger.MainMenuPanel);
                         _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
                         _gameState = GameState.NONE;
                         break;
