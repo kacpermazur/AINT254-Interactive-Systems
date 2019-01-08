@@ -143,6 +143,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8584374}
+  - {fileID: 7448603}
   - {fileID: 1803240652}
   - {fileID: 2077192508}
   m_Father: {fileID: 261929827}
@@ -199,6 +200,87 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _start: {fileID: 1803240653}
   _exit: {fileID: 2077192509}
+--- !u!1 &7448602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 7448603}
+  - component: {fileID: 7448605}
+  - component: {fileID: 7448604}
+  m_Layer: 5
+  m_Name: How To Play
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7448603
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 7448602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4457272}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -288.29974, y: 71.8}
+  m_SizeDelta: {x: 579.8, y: 76.4}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &7448604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 7448602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.53706837, g: 0.764151, b: 0.75593317, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'How To Play:
+
+    1st Left Click: Shoots attraction Orb In Faceing Direction.
+
+    2nd Left Click: Stops Moving Orb And You Can Run Into It And Get Push Further
+    Distance!
+
+    3rd left Click: Removes Orb If If it Exists Ready For You To Fire Again!'
+--- !u!222 &7448605
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 7448602}
 --- !u!1 &8584373
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,8 +314,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -144.63, y: 114}
-  m_SizeDelta: {x: 289.26, y: 84}
+  m_AnchoredPosition: {x: -144.63, y: 133.4}
+  m_SizeDelta: {x: 289.3, y: 45.1}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &8584375
 MonoBehaviour:
@@ -1812,7 +1894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 0}
+  profile: {fileID: 11400000, guid: eece9e76f06dd0b4aaff974e04494722, type: 2}
 --- !u!1 &663312987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4883,7 +4965,7 @@ RectTransform:
   m_Children:
   - {fileID: 105749980}
   m_Father: {fileID: 4457272}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5271,7 +5353,7 @@ RectTransform:
   m_Children:
   - {fileID: 330241975}
   m_Father: {fileID: 4457272}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -187,9 +187,6 @@
             <e p="Input" t="Include">
               <e p="InputHandler.cs" t="Include" />
             </e>
-            <e p="Pooling" t="Include">
-              <e p="PoolManger.cs" t="Include" />
-            </e>
             <e p="UI" t="Include">
               <e p="UIManger.cs" t="Include" />
               <e p="UIPanel.cs" t="Include" />
