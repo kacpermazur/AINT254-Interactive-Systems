@@ -8,7 +8,6 @@ namespace Player
 	public class PlayerManager : MonoBehaviour, IInitializable
 	{
 		private static readonly string PlayerMangerObjectName = typeof(PlayerManager).Name;
-		private static PlayerManager _instance;
 
 		[SerializeField] private PlayerData _playerDataConfig;
 		[SerializeField] private Transform _shootLocation;
@@ -17,35 +16,32 @@ namespace Player
 		private PlayerController _playerController;
 		private RigidbodyFirstPersonController _controller;
 
-		public static PlayerData PlayerDataConfig
+		public PlayerData PlayerDataConfig
 		{
 			get
 			{
-				if (_instance._playerDataConfig == null)
+				if (_playerDataConfig == null)
 				{
 					LogMessage("PlayDataConfig Not Set Up");
 					return null;
 				}
 				else
 				{
-					return _instance._playerDataConfig;
+					return _playerDataConfig;
 				}
 			}
 		}
 		
-		public static PlayerManager instance { get { return _instance; } }
+		public Transform PlayerTransform => transform;
+		public Transform BulletSpawn => _shootLocation;
 		
-		public Transform PlayerTransform{ get { return transform; }}
-		public Transform BulletSpawn{ get { return _shootLocation; }}
+		public Rigidbody PlayerRigidbody => _rigidbody;
 		
-		public Rigidbody PlayerRigidbody{ get { return _rigidbody; }}
-		
-		public PlayerController PlayerController { get { return _playerController; } }
-		public RigidbodyFirstPersonController FirstPersonController { get { return _controller; } }
+		public PlayerController PlayerController => _playerController;
+		public RigidbodyFirstPersonController FirstPersonController => _controller;
 
 		public void Initialize()
 		{
-			_instance = this;
 			_rigidbody = GetComponent<Rigidbody>();
 			_playerController = GetComponent<PlayerController>();
 			_controller = GetComponent<RigidbodyFirstPersonController>();

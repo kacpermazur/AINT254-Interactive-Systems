@@ -600,7 +600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &215212671
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1913,7 +1913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &542291512
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3453,16 +3453,44 @@ MonoBehaviour:
   masterMixer: {fileID: 24100000, guid: 43db6131658f9cc4ab4c97ff1bae2952, type: 2}
   _audioSourceMusic: {fileID: 0}
   _audioSourceSfx: {fileID: 0}
-  _soundSfx: []
-  _soundMusic:
-  - Name: main
-    Audio: {fileID: 8300000, guid: f34785bd2c3d8f744971af4ad05b9ac3, type: 3}
+  _soundSfx:
+  - Name: bulletHum
+    Clip: {fileID: 8300000, guid: bb0408feb58c9904da70efc3d65eec83, type: 3}
     Loop: 1
+    Volume: 0.08
+    Pitch: 0
+    SpacialBlend: 1
+    Source: {fileID: 0}
+  - Name: shoot
+    Clip: {fileID: 8300000, guid: 456dfa1110a132949a76e06e857aa4cf, type: 3}
+    Loop: 0
+    Volume: 0.47
+    Pitch: 0
+    SpacialBlend: 0
+    Source: {fileID: 0}
+  - Name: death
+    Clip: {fileID: 8300000, guid: 0beb0dee6577aa34cba9a601d72046f4, type: 3}
+    Loop: 0
+    Volume: 0
+    Pitch: 0
+    SpacialBlend: 0
+    Source: {fileID: 0}
+  _soundMusic:
+  - Name: mainMusic
+    Clip: {fileID: 8300000, guid: 92476e69641fb7e47be69ce728fdfcd2, type: 3}
+    Loop: 1
+    Volume: 0.2
+    Pitch: 0
+    SpacialBlend: 0
+    Source: {fileID: 0}
+  _soundUi:
+  - Name: btnClick
+    Clip: {fileID: 8300000, guid: 871b866d080815446b1ead2995c75d00, type: 3}
+    Loop: 0
     Volume: 1
     Pitch: 0
     SpacialBlend: 0
     Source: {fileID: 0}
-  _soundUi: []
 --- !u!4 &941814123
 Transform:
   m_ObjectHideFlags: 0
@@ -3493,7 +3521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &977259008
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5689,7 +5717,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1780767816
 RectTransform:
   m_ObjectHideFlags: 0

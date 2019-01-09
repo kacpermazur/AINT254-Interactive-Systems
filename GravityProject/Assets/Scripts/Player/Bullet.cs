@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Core;
+using Core.Audio;
 using UnityEngine;
 
 namespace Player
@@ -16,7 +18,7 @@ namespace Player
 
 		private float _checkTimer = 2f;
 		private float _minStopVelocity = 0.1f;
-		
+
 		public enum BulletState
 		{
 			MOVING,
@@ -42,6 +44,7 @@ namespace Player
 
 			_currentState = BulletState.MOVING;
 			
+			GameManger.instance.SoundManger.PlayOutSideSFX("bulletHum", gameObject);
 		}
 
 		private void Update()

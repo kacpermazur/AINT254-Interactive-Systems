@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Audio;
 using Core.Input;
 using Player.Data;
 
@@ -25,7 +26,7 @@ namespace Player
 			
 			if (!isInitialized)
 			{
-				_playerData = PlayerManager.PlayerDataConfig;
+				_playerData = GameManger.instance.PlayerManger.PlayerDataConfig;
 				isInitialized = true;
 			}
 		}
@@ -45,6 +46,12 @@ namespace Player
 			if (InputHandler.Escape())
 			{
 				GameManger.instance.SetGameState(GameManger.GameState.PAUSED);
+
+				if (bullet)
+				{
+					bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
+				}
+				
 			}
 		}
 		
@@ -52,10 +59,10 @@ namespace Player
 		{
 			if (InputHandler.Shoot() && canShoot)
 			{
-				//SoundManger.instance.PlaySound("dabb", SoundManger.SoundType.SFX);
 				if (canSpawn)
 				{
-					bullet = Instantiate(_blackHoleBullet, PlayerManager.instance.BulletSpawn.position, PlayerManager.instance.BulletSpawn.rotation);
+					bullet = Instantiate(_blackHoleBullet, GameManger.instance.PlayerManger.BulletSpawn.position, GameManger.instance.PlayerManger.BulletSpawn.rotation);
+					GameManger.instance.SoundManger.PlaySound("shoot", SoundManger.SoundType.SFX);
 					
 					canSpawn = false;
 				}

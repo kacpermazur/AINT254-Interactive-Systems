@@ -1,6 +1,6 @@
-﻿using Physics.Data;
-using UnityEngine;
+﻿using UnityEngine;
 using Player;
+using Core;
 
 namespace Physics
 {
@@ -26,8 +26,8 @@ namespace Physics
 
 		private void Start()
 		{
-			_playerTransform = PlayerManager.instance.PlayerTransform;
-			_playerRigidbody = PlayerManager.instance.PlayerRigidbody;
+			_playerTransform = GameManger.instance.PlayerManger.PlayerTransform;
+			_playerRigidbody = GameManger.instance.PlayerManger.PlayerRigidbody;
 
 			_bullet = GetComponent<Bullet>();
 			_dest = GetComponentInChildren<destoryBulletCol>();
@@ -41,8 +41,6 @@ namespace Physics
 
 		private void Update()
 		{
-			LogMessage(_dest.hasEntered.ToString());
-			
 			if (_dest.hasEntered && (_bullet.GetBulletState() == Bullet.BulletState.STOP))
 			{
 				float deathTimer = 0.3f;
@@ -62,7 +60,6 @@ namespace Physics
 			}
 		}
 		
-
 		private void AttractToObject()
 		{
 			_direction = _object.position - _playerTransform.position;

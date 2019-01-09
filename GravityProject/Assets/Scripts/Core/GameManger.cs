@@ -17,7 +17,7 @@ namespace Core
         [SerializeField] private UIManger _uiManger;
 
         public PlayerManager PlayerManger => _playerManger;
-        public static SoundManger SoundManger => _instance._soundManger;
+        public SoundManger SoundManger => _soundManger;
         public UIManger UiManger => _uiManger;
 
         public enum GameState
@@ -41,12 +41,10 @@ namespace Core
             }
 
             Initialize();
-            DontDestroyOnLoad(this);
         }
 
         private void Update()
         {
-            
             CheckState();
         }
 
@@ -71,12 +69,14 @@ namespace Core
                         Time.timeScale = 0;
                         _uiManger.OpenPanel(_uiManger.MainMenuPanel);
                         _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
+                        _soundManger.StopSound("mainMusic", SoundManger.SoundType.MUSIC);
                         _gameState = GameState.NONE;
                         break;
                     case GameState.INGAME:
                         Time.timeScale = 1;
                         _uiManger.OpenPanel(_uiManger.InGamePanel);
                         _playerManger.FirstPersonController.mouseLook.SetCursorLock(true);
+                        _soundManger.PlaySound("mainMusic", SoundManger.SoundType.MUSIC);
                         _gameState = GameState.NONE;
                         break;
                     case GameState.PAUSED:
@@ -84,12 +84,14 @@ namespace Core
                         _uiManger.OpenPanel(_uiManger.PausedPanel);
                         _playerManger.PlayerController.CanShoot(false);
                         _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
+                        _soundManger.StopSound("mainMusic", SoundManger.SoundType.MUSIC);
                         _gameState = GameState.NONE;
                         break;
                     case GameState.COMPLETELEVEL:
                         Time.timeScale = 0;
                         _uiManger.OpenPanel(_uiManger.VictoryPanel);
                         _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
+                        _soundManger.StopSound("mainMusic", SoundManger.SoundType.MUSIC);
                         _gameState = GameState.NONE;
                         break;
                     case GameState.NONE:

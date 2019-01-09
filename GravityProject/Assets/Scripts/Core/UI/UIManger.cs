@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Core;
+using Core.Audio;
 using Core.Game;
 using Player;
 using UnityEngine;
@@ -67,13 +68,15 @@ namespace UI
 
         private void OnBtnStartClicked()
         {
+            PlaySound();
             OpenPanel(_inGamePanel);
             GameManger.instance.SetGameState(GameManger.GameState.INGAME);
-            PlayerManager.instance.PlayerController.CanShoot(true);
+            GameManger.instance.PlayerManger.PlayerController.CanShoot(true);
         }
 
         private void OnBtnExitClicked()
         {
+            PlaySound();
             Application.Quit();
         }
 
@@ -84,8 +87,14 @@ namespace UI
 
         private void OnBtnMainMenuClicked()
         {
+            PlaySound();
             OpenPanel(_mainMenu);
             GameManger.instance.SetGameState(GameManger.GameState.START);
+        }
+
+        private void PlaySound()
+        {
+            GameManger.instance.SoundManger.PlaySound("btnClick", SoundManger.SoundType.UI);
         }
 
         public void OpenPanel(UIPanel uiPanel)

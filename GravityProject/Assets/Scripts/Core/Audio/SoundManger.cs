@@ -27,15 +27,7 @@ namespace Core.Audio
 			MUSIC,
 			UI,
 		}
-		
-		// Static: Sound can be played from any location
-		// Dynamic: Sound can be played from specific location
-		public enum SoundMode
-		{
-			STATIC,
-			DYANMIC
-		}
-		
+	
 		public void Initialize()
 		{
 			DontDestroyOnLoad(this);
@@ -70,14 +62,60 @@ namespace Core.Audio
 			}	
 		}
 
-		public void PlaySound(string name, SoundType type, SoundMode mode)
+		public void PlayOutSideSFX(string name, GameObject target)
 		{
-			
-		}
+			SoundClip targetSound = Array.Find(_soundSfx, SoundClip => SoundClip.Name == name);
 
+			if (targetSound.Source == null)
+			{
+				targetSound.Source = target.AddComponent<AudioSource>();
+				targetSound.Source.clip = targetSound.Clip;
+				targetSound.Source.loop = targetSound.Loop;
+				targetSound.Source.volume = targetSound.Volume;
+				targetSound.Source.spatialBlend = targetSound.SpacialBlend;
+			}
+			
+			targetSound.Source.Play();
+		}
+		
+		public SoundClip SelectedClip(string name)
+		{
+			SoundClip targetSound = Array.Find(_soundSfx, SoundClip => SoundClip.Name == name);
+
+			return targetSound;
+		}
+		
+		public void StopSound(string name, SoundType type)
+		{
+			SoundClip selectedSound;
+			
+			switch (type)
+			{
+				case SoundType.SFX:
+					selectedSound = Array.Find(_soundSfx, SoundClip => SoundClip.Name == name);
+					SetAudioSettings(ref _audioSourceSfx, selectedSound);
+					_audioSourceSfx.Stop();
+					break;
+				case SoundType.MUSIC:
+					selectedSound = Array.Find(_soundMusic, SoundClip => SoundClip.Name == name);
+					SetAudioSettings(ref _audioSourceMusic, selectedSound);
+					_audioSourceMusic.Stop();
+					break;
+				case SoundType.UI:
+					selectedSound = Array.Find(_soundUi, SoundClip => SoundClip.Name == name);
+					SetAudioSettings(ref _audioSourceSfx, selectedSound);
+					_audioSourceSfx.Stop();
+					break;
+				default:
+					selectedSound = null;
+					LogMessage("Sound Not Found");
+					return;
+			}	
+		}
+		
 		private void SetAudioSettings(ref AudioSource source, SoundClip sound) 
-		{ 
-			source.clip = sound.Audio; 
+		{
+			source.clip = sound.Clip; 
 			source.loop = sound.Loop; 
 			source.volume = sound.Volume; 
 			//sound.Pitch = sound.Pitch; 

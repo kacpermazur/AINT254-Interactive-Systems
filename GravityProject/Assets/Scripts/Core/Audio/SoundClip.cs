@@ -9,7 +9,7 @@ namespace Core.Audio
     public class SoundClip
     {
         public string Name;
-        public AudioClip Audio;
+        public AudioClip Clip;
 
         public bool Loop;
         
