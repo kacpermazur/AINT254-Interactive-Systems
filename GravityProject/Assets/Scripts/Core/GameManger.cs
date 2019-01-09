@@ -135,9 +135,9 @@ namespace Core
 
             if (_onDeath.HasPlayerDied)
             {
+                _onDeath.HasPlayerDied = false;
                 _playerManger.PlayerController.SpawnPlayer();
                 _playerDeaths += 1;
-                LogMessage("eee");
             }
             
             _uiManger.InGamePanel.changeTimeText(_playerTime);
