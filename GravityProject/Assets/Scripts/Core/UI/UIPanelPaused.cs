@@ -30,7 +30,7 @@ namespace UI.Panel
 			mainMenuButtonClicked?.Invoke();
 		}
 
-		public void CurrentStage(int stage)
+		public void TextCurrentStage(int stage)
 		{
 			_currentStage.text = "You are currently on Stage " + stage;
 		}

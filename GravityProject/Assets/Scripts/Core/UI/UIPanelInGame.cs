@@ -16,7 +16,7 @@ namespace UI.Panel
 		
 		public void changeDeathText(int count)
 		{
-			_timeText.text = "Deaths: " + count;
+			_deathText.text = "Deaths: " + count;
 		}
 		
 		private string FormatTime(float time)

@@ -63,7 +63,10 @@ namespace Core
         public void Initialize()
         {
             InitializeMangers();
+            
             _currentScene = SceneManager.GetActiveScene();
+            _bestTime = PlayerPrefs.GetFloat(_currentScene.name, 0);
+            _uiManger.PausedPanel.TextCurrentStage(_currentScene.buildIndex + 1);
             _gameState = GameState.START;
         }
 
@@ -101,6 +104,7 @@ namespace Core
                         _gameState = GameState.NONE;
                         break;
                     case GameState.COMPLETELEVEL:
+                        OnComplete();
                         Time.timeScale = 0;
                         _uiManger.OpenPanel(_uiManger.VictoryPanel);
                         _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
@@ -119,24 +123,45 @@ namespace Core
         {
             if (_onStart.HasPlayerStarted)
             {
-                if (_onFinish)
+                if (_onFinish.HasPlayerFinished)
                 {
-                    LogMessage("finished");
+                    _gameState = GameState.COMPLETELEVEL;
                 }
                 else
                 {
                     _playerTime += Time.deltaTime;
                 }
-                
             }
-            else
+
+            if (_onDeath.HasPlayerDied)
             {
-                _playerTime = 0;
+                _playerManger.PlayerController.SpawnPlayer();
+                _playerDeaths += 1;
+                LogMessage("eee");
             }
             
             _uiManger.InGamePanel.changeTimeText(_playerTime);
+            _uiManger.InGamePanel.changeDeathText(_playerDeaths);
         }
-      
+
+        private void OnComplete()
+        {
+            if (_playerTime < _bestTime)
+            {
+                _bestTime = _playerTime;
+                PlayerPrefs.SetFloat(_currentScene.name, _bestTime);
+            }
+            
+            _uiManger.VictoryPanel.TextBestTime(_bestTime);
+            _uiManger.VictoryPanel.TextPlayerTime(_playerTime);
+        }
+
+        private void ResetPlayer()
+        {
+            _playerTime = 0;
+            _playerDeaths = 0;
+            _playerManger.PlayerController.SpawnPlayer();
+        }
 
         private static void LogMessage(string message)
         {

@@ -44,11 +44,9 @@ namespace UI.Panel
         
         private string FormatTime(float time)
         {
-            int d = (int)(time * 100.0f);
-            
-            int minutes = d / (60 * 100);
-            int seconds = (d % (60 * 100)) / 100;
-            
+            int seconds = (int) (time % 60);
+            int minutes = (int) (time / 60) % 60;
+				
             return String.Format("{0:00}:{1:00}", minutes, seconds);
         }
     }

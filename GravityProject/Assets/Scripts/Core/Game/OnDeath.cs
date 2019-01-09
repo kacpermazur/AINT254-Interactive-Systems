@@ -18,9 +18,12 @@ namespace Core.Game
 			}
 		}
 
-		private void OnTriggerExit2D(Collider2D other)
+		private void OnTriggerExit(Collider other)
 		{
-			_hasPlayerDied = false;
+			if (other.gameObject.CompareTag("Player"))
+			{
+				_hasPlayerDied = false;
+			}
 		}
-		}
+	}
 }
