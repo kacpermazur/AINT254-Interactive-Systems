@@ -11,6 +11,7 @@ namespace Player
 
 		[SerializeField] private PlayerData _playerDataConfig;
 		[SerializeField] private Transform _shootLocation;
+		[SerializeField] private Transform _playerSpawn;
 
 		private Rigidbody _rigidbody;
 		private PlayerController _playerController;
@@ -34,7 +35,8 @@ namespace Player
 		
 		public Transform PlayerTransform => transform;
 		public Transform BulletSpawn => _shootLocation;
-		
+		public Transform PlayerSpawn => _playerSpawn;
+
 		public Rigidbody PlayerRigidbody => _rigidbody;
 		
 		public PlayerController PlayerController => _playerController;

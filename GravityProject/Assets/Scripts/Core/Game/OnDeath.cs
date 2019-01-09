@@ -6,14 +6,21 @@ namespace Core.Game
 {
 	public class OnDeath : MonoBehaviour
 	{
+		private bool _hasPlayerDied;
+
+		public bool HasPlayerDied => _hasPlayerDied;
 
 		private void OnTriggerEnter(Collider other)
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				
+				_hasPlayerDied = true;
 			}
-
 		}
-	}
+
+		private void OnTriggerExit2D(Collider2D other)
+		{
+			_hasPlayerDied = false;
+		}
+		}
 }

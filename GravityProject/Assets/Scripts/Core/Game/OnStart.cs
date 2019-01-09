@@ -6,11 +6,16 @@ namespace Core.Game
 {
 	public class OnStart : MonoBehaviour
 	{
+		private bool _hasPlayerStarted;
+
+		public bool HasPlayerStarted => _hasPlayerStarted;
+
 		private void OnTriggerEnter(Collider other)
 		{
+			
 			if (other.gameObject.CompareTag("Player"))
 			{
-				
+				_hasPlayerStarted = false;
 			}
 			
 		}
@@ -19,7 +24,7 @@ namespace Core.Game
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				
+				_hasPlayerStarted = true;
 			}
 		}
 	}

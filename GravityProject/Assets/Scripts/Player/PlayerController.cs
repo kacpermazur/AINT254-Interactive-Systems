@@ -31,6 +31,16 @@ namespace Player
 			}
 		}
 
+		public void CanShoot(bool condition)
+		{
+			canShoot = condition;
+		}
+
+		public void SpawnPlayer()
+		{
+			GameManger.instance.PlayerManger.PlayerTransform.position = GameManger.instance.PlayerManger.PlayerSpawn.position;
+		}
+		
 		private void Update()
 		{
 			if (isInitialized)
@@ -87,11 +97,6 @@ namespace Player
 			}
 		}
 
-		public void CanShoot(bool condition)
-		{
-			canShoot = condition;
-		}
-		
 		private static void LogMessage(string message)
 		{
 			Debug.Log("<color=green>" + PlayerControllerObjectName + "</color> : " + message);

@@ -2,6 +2,8 @@
 using UI;
 using UnityEngine;
 using Core.Audio;
+using Core.Game;
+using UnityEngine.SceneManagement;
 
 namespace Core
 {
@@ -10,15 +12,24 @@ namespace Core
         private static readonly string GameMangerObjectName = typeof(GameManger).Name;
         private static GameManger _instance;
 
-        public static GameManger instance { get { return _instance; } }
+        public static GameManger instance => _instance; 
 
         [SerializeField] private PlayerManager _playerManger;
         [SerializeField] private SoundManger _soundManger;
         [SerializeField] private UIManger _uiManger;
 
+        [SerializeField] private OnStart _onStart;
+        [SerializeField] private OnDeath _onDeath;
+        [SerializeField] private OnFinish _onFinish;
+
         public PlayerManager PlayerManger => _playerManger;
         public SoundManger SoundManger => _soundManger;
         public UIManger UiManger => _uiManger;
+
+        private Scene _currentScene;
+        private float _bestTime = 0;
+        private float _playerTime = 0;
+        private int _playerDeaths = 0;
 
         public enum GameState
         {
@@ -46,11 +57,13 @@ namespace Core
         private void Update()
         {
             CheckState();
+            OnGameStart();
         }
 
         public void Initialize()
         {
             InitializeMangers();
+            _currentScene = SceneManager.GetActiveScene();
             _gameState = GameState.START;
         }
 
@@ -101,6 +114,29 @@ namespace Core
                         break;
             }
         }
+
+        private void OnGameStart()
+        {
+            if (_onStart.HasPlayerStarted)
+            {
+                if (_onFinish)
+                {
+                    LogMessage("finished");
+                }
+                else
+                {
+                    _playerTime += Time.deltaTime;
+                }
+                
+            }
+            else
+            {
+                _playerTime = 0;
+            }
+            
+            _uiManger.InGamePanel.changeTimeText(_playerTime);
+        }
+      
 
         private static void LogMessage(string message)
         {
