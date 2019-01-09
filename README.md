@@ -46,3 +46,48 @@ Type: Models
 
 Link: https://assetstore.unity.com/packages/3d/environments/low-poly-pack-94605
 ___
+
+Title: Ambient guitar X1 - Loop mode (Music)
+
+Author: Frankum & Frankumjay
+
+Type: Sound
+
+Link: https://freesound.org/people/frankum/sounds/393520/
+___
+
+Title: WAR 'n' BATTLE sounds - simulations and experiments » 02874 laser harpoon shots.wav (Shoot)
+
+Author: Robinhood76
+
+Type: Sound
+
+Link: https://freesound.org/people/Robinhood76/sounds/131626/
+___
+
+Title: Industrial » Refrigerator humming (Bullet)
+
+Author: CaganCelik
+
+Type: Sound
+
+Link: https://freesound.org/people/CaganCelik/sounds/453376/
+___
+
+Title: SFX UI Button Click (UI)
+
+Author: CaganCelik
+
+Type: Sound
+
+Link: https://freesound.org/people/suntemple/sounds/253168/
+___
+
+Title: SFX UI Button Click (Death)
+
+Author: GameAudio
+
+Type: Sound
+
+Link: https://freesound.org/people/GameAudio/sounds/220203/
+___
