@@ -1,6 +1,7 @@
 ﻿using Player;
 using UI;
 using UnityEngine;
+using Core.Audio;
 
 namespace Core
 {
@@ -12,11 +13,11 @@ namespace Core
         public static GameManger instance { get { return _instance; } }
 
         [SerializeField] private PlayerManager _playerManger;
-        // [SerializeField] private SoundManger _soundManger;
+        [SerializeField] private SoundManger _soundManger;
         [SerializeField] private UIManger _uiManger;
 
         public PlayerManager PlayerManger => _playerManger;
-        // public static SoundManger SoundManger => _instance._soundManger;
+        public static SoundManger SoundManger => _instance._soundManger;
         public UIManger UiManger => _uiManger;
 
         public enum GameState
@@ -59,7 +60,7 @@ namespace Core
         {
            _playerManger.Initialize();
            _uiManger.Initialize();
-           // _soundManger.Initialize();
+           _soundManger.Initialize();
         }
 
         private void CheckState()
