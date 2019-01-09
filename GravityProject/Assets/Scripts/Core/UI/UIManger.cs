@@ -88,7 +88,6 @@ namespace UI
         private void OnBtnMainMenuClicked()
         {
             PlaySound();
-            OpenPanel(_mainMenu);
             GameManger.instance.SetGameState(GameManger.GameState.START);
         }
 

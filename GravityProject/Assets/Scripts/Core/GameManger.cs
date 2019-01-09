@@ -27,6 +27,7 @@ namespace Core
         public UIManger UiManger => _uiManger;
 
         private Scene _currentScene;
+        private bool _hasCompletedLevel;
         private float _bestTime = 0;
         private float _playerTime = 0;
         private int _playerDeaths = 0;
@@ -50,7 +51,7 @@ namespace Core
             {
                 _instance = this;
             }
-
+            
             Initialize();
         }
 
@@ -65,7 +66,7 @@ namespace Core
             InitializeMangers();
             
             _currentScene = SceneManager.GetActiveScene();
-            _bestTime = PlayerPrefs.GetFloat(_currentScene.name, 0);
+            _bestTime = PlayerPrefs.GetFloat(_currentScene.name, Mathf.Infinity);
             _uiManger.PausedPanel.TextCurrentStage(_currentScene.buildIndex + 1);
             _gameState = GameState.START;
         }
@@ -83,6 +84,7 @@ namespace Core
             {
                     case GameState.START:
                         Time.timeScale = 0;
+                        ResetPlayer();
                         _uiManger.OpenPanel(_uiManger.MainMenuPanel);
                         _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
                         _soundManger.StopSound("mainMusic", SoundManger.SoundType.MUSIC);
@@ -104,9 +106,13 @@ namespace Core
                         _gameState = GameState.NONE;
                         break;
                     case GameState.COMPLETELEVEL:
+                        _onFinish.HasPlayerFinished = false;
+                        _hasCompletedLevel = true;
                         OnComplete();
                         Time.timeScale = 0;
                         _uiManger.OpenPanel(_uiManger.VictoryPanel);
+                        _playerManger.PlayerController.CanShoot(false);
+                        _playerManger.PlayerController.Bullet?.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
                         _playerManger.FirstPersonController.mouseLook.SetCursorLock(false);
                         _soundManger.StopSound("mainMusic", SoundManger.SoundType.MUSIC);
                         _gameState = GameState.NONE;
@@ -121,11 +127,12 @@ namespace Core
 
         private void OnGameStart()
         {
-            if (_onStart.HasPlayerStarted)
+            if (_onStart.HasPlayerStarted || _hasCompletedLevel == false)
             {
                 if (_onFinish.HasPlayerFinished)
                 {
                     _gameState = GameState.COMPLETELEVEL;
+                    _hasCompletedLevel = true;
                 }
                 else
                 {
@@ -135,6 +142,7 @@ namespace Core
 
             if (_onDeath.HasPlayerDied)
             {
+                _soundManger.PlaySound("death", SoundManger.SoundType.SFX);
                 _onDeath.HasPlayerDied = false;
                 _playerManger.PlayerController.SpawnPlayer();
                 _playerDeaths += 1;
@@ -158,6 +166,7 @@ namespace Core
 
         private void ResetPlayer()
         {
+            _hasCompletedLevel = false;
             _playerTime = 0;
             _playerDeaths = 0;
             _playerManger.PlayerController.SpawnPlayer();

@@ -8,7 +8,11 @@ namespace Core.Game
 	{
 		private bool _hasPlayerFinished;
 
-		public bool HasPlayerFinished => _hasPlayerFinished;
+		public bool HasPlayerFinished
+		{
+			get { return _hasPlayerFinished; }
+			set { _hasPlayerFinished = value; }
+		}
 
 		private void OnTriggerEnter(Collider other)
 		{

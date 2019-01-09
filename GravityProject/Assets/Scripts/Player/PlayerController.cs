@@ -17,9 +17,12 @@ namespace Player
 
 		[SerializeField] private GameObject _blackHoleBullet;	
 		
-		private GameObject bullet;
-		private bool canSpawn = false;
-		private bool canShoot = false;
+		private GameObject _bullet;
+
+		public GameObject Bullet => _bullet;
+
+		private bool _canSpawn = false;
+		private bool _canShoot = false;
 
 		public void Initialize()
 		{
@@ -33,7 +36,7 @@ namespace Player
 
 		public void CanShoot(bool condition)
 		{
-			canShoot = condition;
+			_canShoot = condition;
 		}
 
 		public void SpawnPlayer()
@@ -57,9 +60,9 @@ namespace Player
 			{
 				GameManger.instance.SetGameState(GameManger.GameState.PAUSED);
 
-				if (bullet)
+				if (_bullet)
 				{
-					bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
+					_bullet.GetComponent<Bullet>().SetBulletState(Player.Bullet.BulletState.DESTROY);
 				}
 				
 			}
@@ -67,33 +70,33 @@ namespace Player
 		
 		private void Shoot()
 		{
-			if (InputHandler.Shoot() && canShoot)
+			if (InputHandler.Shoot() && _canShoot)
 			{
-				if (canSpawn)
+				if (_canSpawn)
 				{
-					bullet = Instantiate(_blackHoleBullet, GameManger.instance.PlayerManger.BulletSpawn.position, GameManger.instance.PlayerManger.BulletSpawn.rotation);
+					_bullet = Instantiate(_blackHoleBullet, GameManger.instance.PlayerManger.BulletSpawn.position, GameManger.instance.PlayerManger.BulletSpawn.rotation);
 					GameManger.instance.SoundManger.PlaySound("shoot", SoundManger.SoundType.SFX);
-					
-					canSpawn = false;
+
+					_canSpawn = false;
 				}
 				
-				if (bullet.GetComponent<Bullet>().GetBulletState() == Bullet.BulletState.MOVING)
+				if (_bullet.GetComponent<Bullet>().GetBulletState() == Player.Bullet.BulletState.MOVING)
 				{
-					bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.STOP);
+					_bullet.GetComponent<Bullet>().SetBulletState(Player.Bullet.BulletState.STOP);
 				}
-				else if (bullet.GetComponent<Bullet>().GetBulletState() == Bullet.BulletState.STOP)
+				else if (_bullet.GetComponent<Bullet>().GetBulletState() == Player.Bullet.BulletState.STOP)
 				{
-					bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
-					canSpawn = true;
+					_bullet.GetComponent<Bullet>().SetBulletState(Player.Bullet.BulletState.DESTROY);
+					_canSpawn = true;
 				}
 			}
 		}
 
 		private void CheckBulletDestoryed()
 		{
-			if (bullet == null)
+			if (_bullet == null)
 			{
-				canSpawn = true;
+				_canSpawn = true;
 			}
 		}
 
