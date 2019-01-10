@@ -24,12 +24,10 @@ namespace Player
 		public void SetCanPause(bool conditonOverride)
 		{
 			_canPause = conditonOverride;
-			
 		}
 
 		public void Initialize()
 		{
-			
 			if (!isInitialized)
 			{
 				isInitialized = true;
