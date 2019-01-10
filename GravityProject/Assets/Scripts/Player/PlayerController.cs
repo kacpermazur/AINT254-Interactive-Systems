@@ -19,10 +19,15 @@ namespace Player
 		
 		private GameObject _bullet;
 
-		public GameObject Bullet => _bullet;
-
 		private bool _canSpawn = false;
 		private bool _canShoot = false;
+
+		private bool _canPause;
+		public void SetCanPause(bool conditonOverride)
+		{
+			_canPause = conditonOverride;
+			
+		}
 
 		public void Initialize()
 		{
@@ -43,6 +48,14 @@ namespace Player
 		{
 			GameManger.instance.PlayerManger.PlayerTransform.position = GameManger.instance.PlayerManger.PlayerSpawn.position;
 		}
+
+		public void DestoryBullet()
+		{
+			if (_bullet)
+			{
+				_bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
+			}
+		}
 		
 		private void Update()
 		{
@@ -56,13 +69,13 @@ namespace Player
 
 		private void PauseMenu()
 		{
-			if (InputHandler.Escape())
+			if (InputHandler.Escape() && _canPause)
 			{
 				GameManger.instance.SetGameState(GameManger.GameState.PAUSED);
 
 				if (_bullet)
 				{
-					_bullet.GetComponent<Bullet>().SetBulletState(Player.Bullet.BulletState.DESTROY);
+					_bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
 				}
 				
 			}
@@ -80,13 +93,13 @@ namespace Player
 					_canSpawn = false;
 				}
 				
-				if (_bullet.GetComponent<Bullet>().GetBulletState() == Player.Bullet.BulletState.MOVING)
+				if (_bullet.GetComponent<Bullet>().GetBulletState() == Bullet.BulletState.MOVING)
 				{
-					_bullet.GetComponent<Bullet>().SetBulletState(Player.Bullet.BulletState.STOP);
+					_bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.STOP);
 				}
-				else if (_bullet.GetComponent<Bullet>().GetBulletState() == Player.Bullet.BulletState.STOP)
+				else if (_bullet.GetComponent<Bullet>().GetBulletState() == Bullet.BulletState.STOP)
 				{
-					_bullet.GetComponent<Bullet>().SetBulletState(Player.Bullet.BulletState.DESTROY);
+					_bullet.GetComponent<Bullet>().SetBulletState(Bullet.BulletState.DESTROY);
 					_canSpawn = true;
 				}
 			}
