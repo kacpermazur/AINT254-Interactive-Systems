@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Player;
 using Core;
+using Physics.Data;
 
 namespace Physics
 {
@@ -21,8 +22,7 @@ namespace Physics
 		private Vector3 _direction;
 		private float _force;
 
-		[SerializeField] private float _forceMultiplyer;
-		[SerializeField] private float _attractRadius;
+		[SerializeField] private PhysicsData _data;
 
 		private void Start()
 		{
@@ -36,7 +36,7 @@ namespace Physics
 			_collider = GetComponent<SphereCollider>();
 			
 			
-			_collider.radius = _attractRadius;
+			_collider.radius = _data.attractRadius;
 		}
 
 		private void Update()
@@ -65,7 +65,7 @@ namespace Physics
 			_direction = _object.position - _playerTransform.position;
 			_force = (_object.mass * _playerRigidbody.mass);
 
-			_playerRigidbody.AddForce(_direction.normalized * _force * _forceMultiplyer);
+			_playerRigidbody.AddForce(_direction.normalized * _force * _data.forceMultiplier);
 		}
 
 		private static void LogMessage(string message)

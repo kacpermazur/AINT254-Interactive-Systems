@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f603b4e1cf62e147a9449cd0a03d15e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shootForce: 5
+  _data: {fileID: 11400000, guid: 970a6d0fc6331f34a90907f6fe5717af, type: 2}
 --- !u!114 &114848076565010174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,8 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dest: {fileID: 114260641102525548}
-  _forceMultiplyer: 2
-  _attractRadius: 7
+  _data: {fileID: 11400000, guid: 7dffe276ac433344396acbe2f36f06aa, type: 2}
 --- !u!135 &135748858555832466
 SphereCollider:
   m_ObjectHideFlags: 1

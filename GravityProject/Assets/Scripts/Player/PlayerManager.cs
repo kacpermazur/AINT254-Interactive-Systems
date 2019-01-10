@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Player.Data;
 using UnityStandardAssets.Characters.FirstPerson;
 
 namespace Player
@@ -9,29 +8,13 @@ namespace Player
 	{
 		private static readonly string PlayerMangerObjectName = typeof(PlayerManager).Name;
 
-		[SerializeField] private PlayerData _playerDataConfig;
 		[SerializeField] private Transform _shootLocation;
 		[SerializeField] private Transform _playerSpawn;
 
 		private Rigidbody _rigidbody;
+		
 		private PlayerController _playerController;
 		private RigidbodyFirstPersonController _controller;
-
-		public PlayerData PlayerDataConfig
-		{
-			get
-			{
-				if (_playerDataConfig == null)
-				{
-					LogMessage("PlayDataConfig Not Set Up");
-					return null;
-				}
-				else
-				{
-					return _playerDataConfig;
-				}
-			}
-		}
 		
 		public Transform PlayerTransform => transform;
 		public Transform BulletSpawn => _shootLocation;

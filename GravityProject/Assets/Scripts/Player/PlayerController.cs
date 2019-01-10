@@ -1,7 +1,7 @@
 ﻿using Core;
 using Core.Audio;
 using Core.Input;
-using Player.Data;
+using Physics;
 
 namespace Player
 {
@@ -10,8 +10,6 @@ namespace Player
 	public class PlayerController : MonoBehaviour, IInitializable
 	{
 		private static readonly string PlayerControllerObjectName = typeof(PlayerController).Name;
-		
-		private PlayerData _playerData;
 		
 		private bool isInitialized;
 
@@ -34,7 +32,6 @@ namespace Player
 			
 			if (!isInitialized)
 			{
-				_playerData = GameManger.instance.PlayerManger.PlayerDataConfig;
 				isInitialized = true;
 			}
 		}

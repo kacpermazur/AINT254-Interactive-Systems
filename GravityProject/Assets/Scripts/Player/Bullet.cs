@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using Core;
 using Core.Audio;
+using Physics;
+using Player.Data;
 using UnityEngine;
 
 namespace Player
@@ -12,11 +14,7 @@ namespace Player
 		private Rigidbody _bullet;
 		private Collider _bulletColider;
 
-		//ToDo Move This To Scriptable Object
-		[SerializeField] private float _shootForce;
-
-		private float _checkTimer = 2f;
-		private float _minStopVelocity = 0.1f;
+		[SerializeField] private BulletData _data;
 
 		public enum BulletState
 		{
@@ -34,17 +32,15 @@ namespace Player
 		{
 			_bulletColider = GetComponent<SphereCollider>();
 			
-			StartCoroutine(CheckVelocity());
-			
 			if (_bullet == null)
 			{
 				_bullet = GetComponent<Rigidbody>();
 			}
-
-			_currentState = BulletState.MOVING;
 			
 			GameManger.instance.SoundManger.PlayOutSideSFX("bulletHum", gameObject);
-		}
+			
+			_currentState = BulletState.MOVING;
+			}
 
 		private void Update()
 		{
@@ -57,7 +53,7 @@ namespace Player
 			{
 				case BulletState.MOVING:
 					_bulletColider.enabled = false;
-					_bullet.AddRelativeForce(Vector3.forward  * _shootForce, ForceMode.Impulse);
+					_bullet.AddRelativeForce(Vector3.forward  * _data.shootForce, ForceMode.Impulse);
 					break;
 				case BulletState.STOP:
 					_bulletColider.enabled = true;
@@ -69,16 +65,6 @@ namespace Player
 				default:
 					LogMessage("States Change Error");
 					break;
-			}
-		}
-		
-		private IEnumerator CheckVelocity()
-		{
-			yield return new WaitForSeconds(_checkTimer);
-			
-			if (_bullet.velocity.magnitude < _minStopVelocity)
-			{
-				_currentState = BulletState.STOP;
 			}
 		}
 		
